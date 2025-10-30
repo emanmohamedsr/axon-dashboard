@@ -9,15 +9,23 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, Settings, User } from "lucide-react";
+import { LogOut, PanelLeftClose, Settings, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets";
+import { cn } from "@/lib/utils";
+import { useSidebar } from "@/components/ui/sidebar";
 
 const Navbar = () => {
+	const { open, toggleSidebar } = useSidebar();
 	return (
 		<nav className='p-4 flex justify-between items-center'>
-			<Button variant='ghost' size='icon'>
-				toggle sidebar
+			<Button variant='ghost' size='icon' onClick={toggleSidebar}>
+				<PanelLeftClose
+					className={cn(
+						"h-[1.2rem] w-[1.2rem]  transition-all",
+						open ? "rotate-0" : "-rotate-180",
+					)}
+				/>
 			</Button>
 			<div className='flex gap-4 justify-center items-center'>
 				<Link to={"/"}>

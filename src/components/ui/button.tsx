@@ -10,7 +10,7 @@ const buttonVariants = cva(
 		variants: {
 			variant: {
 				primary:
-					"bg-axon-gradient hover:opacity-80 text-white focus-visible:ring-axon-blue/20 dark:focus-visible:ring-axon-blue/40",
+					"bg-axon-gradient hover:opacity-80 text-axon-text-color focus-visible:ring-axon-blue/20 dark:focus-visible:ring-axon-blue/40",
 				default: "bg-primary text-primary-foreground hover:bg-primary/90",
 				destructive:
 					"bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",

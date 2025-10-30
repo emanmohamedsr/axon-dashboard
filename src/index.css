@@ -47,6 +47,7 @@
   --color-axon-muted-rose: var(--axon-muted-rose);
   --color-axon-node-blue: var(--axon-node-blue);
   --color-axon-node-rose: var(--axon-node-rose);
+  --color-axon-text-color: var(--axon-text-color);
 }
 
 :root {
@@ -90,6 +91,7 @@
   --axon-muted-rose: #D9A8C0;
   --axon-node-blue: #9FB8FF;
   --axon-node-rose: #E8B8C4;
+  --axon-text-color: #ffffff;
 }
 
 .dark {
@@ -132,6 +134,7 @@
   --axon-muted-rose: #E4B8CC;
   --axon-node-blue: #AFC8FF;
   --axon-node-rose: #F2C8D4;
+  --axon-text-color: #2e2937;
 }
 
 /* Optional: Custom utility classes for your logo colors */
