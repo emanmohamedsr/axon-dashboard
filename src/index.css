@@ -43,6 +43,7 @@
   --color-axon-blue: var(--axon-blue);
   --color-axon-light-blue: var(--axon-light-blue);
   --color-axon-rose: var(--axon-rose);
+  --color-axon-dark-rose: var(--axon-dark-rose);
   --color-axon-desaturated-blue: var(--axon-desaturated-blue);
   --color-axon-muted-rose: var(--axon-muted-rose);
   --color-axon-node-blue: var(--axon-node-blue);
@@ -92,6 +93,8 @@
   --axon-node-blue: #9FB8FF;
   --axon-node-rose: #E8B8C4;
   --axon-text-color: #ffffff;
+  --axon-dark-rose: #b95174;
+  --axon-gradient: linear-gradient(135deg, var(--axon-blue) 0%, var(--axon-light-blue) 60%, var(--axon-rose) 100%);
 }
 
 .dark {
@@ -135,6 +138,8 @@
   --axon-node-blue: #AFC8FF;
   --axon-node-rose: #F2C8D4;
   --axon-text-color: #2e2937;
+  --axon-dark-rose: #eb83a6;
+  --axon-gradient: linear-gradient(135deg, #4e6f9e 0%, #8095b9 60%, #f9a0b2 100%);
 }
 
 /* Optional: Custom utility classes for your logo colors */
@@ -168,12 +173,9 @@
   }
 
   .bg-axon-gradient {
-    background: linear-gradient(135deg, var(--axon-blue) 0%, var(--axon-light-blue) 60%, var(--axon-rose) 100%);
+    background: var(--axon-gradient);
   }
 
-  .bg-darker-axon-gradient {
-    background: linear-gradient(135deg, #4e6f9e 0%, #8095b9 60%, #f9a0b2 100%);
-  }
 }
 
 @layer base {

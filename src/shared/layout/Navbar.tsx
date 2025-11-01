@@ -9,32 +9,86 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, PanelLeftClose, Settings, User } from "lucide-react";
+import {
+	LogOut,
+	PanelLeftClose,
+	SearchIcon,
+	Settings,
+	User,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/components/ui/sidebar";
+import {
+	InputGroup,
+	InputGroupAddon,
+	InputGroupInput,
+} from "@/components/ui/input-group";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogPortal,
+} from "@/components/ui/dialog";
+import { DialogTitle, DialogTrigger } from "@radix-ui/react-dialog";
 
 const Navbar = () => {
 	const { open, toggleSidebar } = useSidebar();
 	return (
-		<nav className='p-4 flex justify-between items-center'>
-			<Button variant='ghost' size='icon' onClick={toggleSidebar}>
-				<PanelLeftClose
-					className={cn(
-						"h-[1.2rem] w-[1.2rem]  transition-all",
-						open ? "rotate-0" : "-rotate-180",
-					)}
-				/>
-			</Button>
+		<nav className='p-4 flex justify-between items-center sm:gap-2'>
+			{/* left */}
+			<div className=' flex sm:flex-1 sm:gap-2 items-center'>
+				{/* sidebar collapsable icon */}
+				<Button variant='ghost' size='icon' onClick={toggleSidebar}>
+					<PanelLeftClose
+						className={cn(
+							"h-[1.2rem] w-[1.2rem]  transition-all",
+							open ? "rotate-0" : "-rotate-180",
+						)}
+					/>
+				</Button>
+				{/* search */}
+				<Dialog>
+					<DialogTrigger asChild>
+						<Button variant='ghost' size='icon' aria-label='Search'>
+							<SearchIcon className='h-[1.2rem] w-[1.2rem]' />
+						</Button>
+					</DialogTrigger>
+					<DialogPortal>
+						<DialogContent className='top-[20%]'>
+							<DialogHeader>
+								<DialogTitle>Search</DialogTitle>
+								<DialogDescription>
+									Search for anything within the dashboard.
+								</DialogDescription>
+							</DialogHeader>
+							<div className='mt-4 flex gap-2'>
+								<InputGroup className=''>
+									<InputGroupInput placeholder='Search...' />
+									<InputGroupAddon>
+										<SearchIcon />
+									</InputGroupAddon>
+								</InputGroup>
+								<Button variant={"primary"}>Search</Button>
+							</div>
+						</DialogContent>
+					</DialogPortal>
+				</Dialog>
+			</div>
+			{/* right */}
 			<div className='flex gap-4 justify-center items-center'>
-				<Link to={"/"}>
-					<img className='object-cover w-8' src='/logo.svg' alt='logo' />
-				</Link>
+				{/* toggle theme */}
 				<ModeToggle />
+				{/* logo */}
+				<Link to={"/"}>
+					<img className='object-cover w-6 sm:w-8' src='/logo.svg' alt='logo' />
+				</Link>
+				{/* profile dropdown */}
 				<DropdownMenu>
 					<DropdownMenuTrigger>
-						<Avatar>
+						<Avatar className='size-6 sm:size-8 cursor-pointer'>
 							<AvatarImage src={assets.avatar} alt='avatar' />
 							<AvatarFallback>ES</AvatarFallback>
 						</Avatar>

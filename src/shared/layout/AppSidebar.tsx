@@ -1,9 +1,20 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
 	Sidebar,
 	SidebarContent,
 	SidebarFooter,
 	SidebarGroup,
-	SidebarGroupAction,
 	SidebarGroupLabel,
 	SidebarHeader,
 	SidebarMenu,
@@ -17,65 +28,63 @@ import {
 	SidebarSeparator,
 	useSidebar,
 } from "@/components/ui/sidebar";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
 	Activity,
-	BotMessageSquare,
 	Calendar,
+	ChartArea,
 	ChevronUp,
 	Home,
-	Inbox,
 	LogOut,
 	Map,
 	MoreHorizontal,
-	Plus,
-	Search,
 	Settings,
+	SquareCheckBig,
 	User,
+	UsersRound,
 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { assets } from "../assets";
-import {
-	Collapsible,
-	CollapsibleContent,
-	CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { useIsMobile } from "@/hooks/use-mobile";
 
-// Menu items.
+// Platform items.
 const items = [
 	{
 		title: "Home",
-		url: "#",
+		url: "/",
 		icon: Home,
 	},
 	{
-		title: "Inbox",
-		url: "#",
-		icon: Inbox,
+		title: "Team",
+		url: "/team",
+		icon: UsersRound,
 	},
 	{
 		title: "Calendar",
-		url: "#",
+		url: "/calendar",
 		icon: Calendar,
 	},
 	{
-		title: "Search",
-		url: "#",
-		icon: Search,
+		title: "Tasks",
+		url: "/tasks",
+		icon: SquareCheckBig,
+	},
+];
+
+// Statistics charts items.
+const statsChartItems = [
+	{
+		title: "Line Charts",
+		url: "/charts/line",
 	},
 	{
-		title: "Settings",
-		url: "#",
-		icon: Settings,
+		title: "Bar Charts",
+		url: "/charts/bar",
+	},
+	{
+		title: "Pie Charts",
+		url: "/charts/pie",
 	},
 ];
 
@@ -94,7 +103,7 @@ const AppSidebar = () => {
 									"bg-transparent object-cover rounded-full",
 									!open ? "size-[1.2rem]" : "size-10",
 								)}
-								src='/public/logo.svg'
+								src='/logo.svg'
 								alt='logo'
 							/>
 							<span className='bg-linear-to-r from-[#6FA6F0] via-[#9FB8E8] to-[#F3B8C7] bg-clip-text text-transparent font-bold -ml-1 text-xl tracking-wide'>
@@ -111,31 +120,39 @@ const AppSidebar = () => {
 				<SidebarMenu className={cn(open && "px-2 my-2")}>
 					<SidebarGroup>
 						<SidebarGroupLabel className='font-bold font-lg'>
-							platform
+							Platforms
 						</SidebarGroupLabel>
 						{items.map((item) => (
 							<SidebarMenuItem key={item.title}>
-								<SidebarMenuButton asChild>
-									<a href={item.url}>
-										<item.icon />
-										<span>{item.title}</span>
-									</a>
-								</SidebarMenuButton>
+								<NavLink to={item.url}>
+									{({ isActive }) => (
+										<SidebarMenuButton
+											className={cn(
+												"cursor-pointer",
+												isActive && "bg-axon-gradient",
+											)}>
+											<item.icon />
+											<span>{item.title}</span>
+										</SidebarMenuButton>
+									)}
+								</NavLink>
 							</SidebarMenuItem>
 						))}
 					</SidebarGroup>
 
 					<SidebarGroup>
-						<SidebarGroupLabel className='font-bold'>general</SidebarGroupLabel>
+						<SidebarGroupLabel className='font-bold'>
+							Statistics
+						</SidebarGroupLabel>
 						<Collapsible
 							open={openCollapsedGroup3}
 							onOpenChange={setOpenCollapsedGroup3}
 							className='group/collapsible'>
 							<SidebarMenuItem>
 								<CollapsibleTrigger asChild>
-									<SidebarMenuButton className='font-semibold text-md'>
-										<BotMessageSquare />
-										Models
+									<SidebarMenuButton className='font-medium text-md'>
+										<ChartArea />
+										charts
 										<ChevronUp
 											className={cn(
 												"ml-auto transition-all",
@@ -144,19 +161,24 @@ const AppSidebar = () => {
 										/>
 									</SidebarMenuButton>
 								</CollapsibleTrigger>
-
 								<CollapsibleContent>
 									<SidebarMenuSub>
-										<SidebarMenuSubItem>
-											<SidebarMenuSubButton asChild>
-												<span>model 1</span>
-											</SidebarMenuSubButton>
-										</SidebarMenuSubItem>
-										<SidebarMenuSubItem>
-											<SidebarMenuSubButton asChild>
-												<span>model 2</span>
-											</SidebarMenuSubButton>
-										</SidebarMenuSubItem>
+										{statsChartItems.map((item) => (
+											<SidebarMenuSubItem key={item.title}>
+												<NavLink to={item.url}>
+													{({ isActive }) => (
+														<SidebarMenuSubButton
+															asChild
+															className={cn(
+																"cursor-pointer",
+																isActive && "bg-axon-gradient",
+															)}>
+															<span>{item.title}</span>
+														</SidebarMenuSubButton>
+													)}
+												</NavLink>
+											</SidebarMenuSubItem>
+										))}
 									</SidebarMenuSub>
 								</CollapsibleContent>
 							</SidebarMenuItem>
@@ -164,19 +186,20 @@ const AppSidebar = () => {
 					</SidebarGroup>
 
 					<SidebarGroup>
-						<SidebarGroupLabel className='font-bold'>
-							projects
-						</SidebarGroupLabel>
-						<SidebarGroupAction>
-							<Plus />
-						</SidebarGroupAction>
+						<SidebarGroupLabel className='font-bold'>Portals</SidebarGroupLabel>
 						<SidebarMenuItem>
-							<SidebarMenuButton asChild>
-								<a href='#'>
-									<Map />
-									<span className='font-semibold font-lg'>Maps</span>
-								</a>
-							</SidebarMenuButton>
+							<NavLink to='/maps'>
+								{({ isActive }) => (
+									<SidebarMenuButton
+										className={cn(
+											"cursor-pointer flex items-center gap-2",
+											isActive && "bg-axon-gradient",
+										)}>
+										<Map className='w-[1.2rem] h-[1.2rem]' />
+										<span className='font-semibold font-lg'>Maps</span>
+									</SidebarMenuButton>
+								)}
+							</NavLink>
 							<DropdownMenu>
 								<DropdownMenuTrigger asChild>
 									<SidebarMenuAction>
@@ -185,10 +208,10 @@ const AppSidebar = () => {
 								</DropdownMenuTrigger>
 								<DropdownMenuContent side='right' align='start'>
 									<DropdownMenuItem>
-										<span>Edit Project</span>
+										<span>Edit</span>
 									</DropdownMenuItem>
 									<DropdownMenuItem>
-										<span>Delete Project</span>
+										<span>View</span>
 									</DropdownMenuItem>
 								</DropdownMenuContent>
 							</DropdownMenu>
@@ -200,11 +223,21 @@ const AppSidebar = () => {
 							Notifications
 						</SidebarGroupLabel>
 						<SidebarMenuItem>
-							<SidebarMenuButton>
-								<Activity />
-								System
-							</SidebarMenuButton>
-							<SidebarMenuBadge>24</SidebarMenuBadge>
+							<NavLink to='/notifications/system'>
+								{({ isActive }) => (
+									<SidebarMenuButton
+										className={cn(
+											"cursor-pointer flex items-center gap-2",
+											isActive && "bg-axon-gradient",
+										)}>
+										<Activity className='w-[1.2rem] h-[1.2rem] ' />
+										System
+										<SidebarMenuBadge className='cursor-pointer'>
+											24
+										</SidebarMenuBadge>
+									</SidebarMenuButton>
+								)}
+							</NavLink>
 						</SidebarMenuItem>
 					</SidebarGroup>
 				</SidebarMenu>
@@ -228,9 +261,9 @@ const AppSidebar = () => {
 							</SidebarMenuButton>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent
-							className={cn(isMobile ? "w-[16rem]" : "w-52")}
+							className={cn(!isMobile && open && "w-52")}
 							side='top'
-							align='center'
+							align={`${isMobile || (isMobile && !open) ? "end" : "center"}`}
 							sideOffset={10}>
 							<DropdownMenuItem>
 								<User className='h-[1.2rem] w-[1.2rem] mr-2' />
