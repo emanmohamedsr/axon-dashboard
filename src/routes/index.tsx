@@ -1,4 +1,5 @@
 import HomePage from "@/pages/Home";
+import TeamPage from "@/pages/Team";
 import RootLayout from "@/shared/layout";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "team",
-				element: <div>Team Page</div>,
+				element: <TeamPage />,
 			},
 			{
 				path: "profile",

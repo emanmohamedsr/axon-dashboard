@@ -49,6 +49,7 @@
   --color-axon-node-blue: var(--axon-node-blue);
   --color-axon-node-rose: var(--axon-node-rose);
   --color-axon-text-color: var(--axon-text-color);
+  --color-scrollbar: var(--scrollbar);
 }
 
 :root {
@@ -95,6 +96,7 @@
   --axon-text-color: #ffffff;
   --axon-dark-rose: #b95174;
   --axon-gradient: linear-gradient(135deg, var(--axon-blue) 0%, var(--axon-light-blue) 60%, var(--axon-rose) 100%);
+  --scrollbar: oklch(86.995% 0.0001 271.152);
 }
 
 .dark {
@@ -140,6 +142,7 @@
   --axon-text-color: #2e2937;
   --axon-dark-rose: #eb83a6;
   --axon-gradient: linear-gradient(135deg, #4e6f9e 0%, #8095b9 60%, #f9a0b2 100%);
+  --scrollbar: oklch(0.269 0 0);
 }
 
 /* Optional: Custom utility classes for your logo colors */
@@ -186,4 +189,16 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+::-webkit-scrollbar {
+  @apply w-2 h-2
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-scrollbar rounded-full border-border
 }
