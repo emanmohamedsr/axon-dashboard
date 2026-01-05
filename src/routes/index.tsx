@@ -1,5 +1,5 @@
 import CalendarPage from "@/pages/Calendar";
-import HomePage from "@/pages/Home";
+import LandingPage from "@/pages/Landing";
 import TeamPage from "@/pages/Team";
 import RootLayout from "@/shared/layout";
 import { createBrowserRouter } from "react-router-dom";
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <HomePage />,
+				element: <LandingPage />,
 			},
 			{
 				path: "calendar",

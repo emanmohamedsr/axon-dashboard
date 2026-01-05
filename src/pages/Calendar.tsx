@@ -1,13 +1,13 @@
 import {
-	CalendarView,
 	EventsList,
+	MainCalendarView,
 	ResponsiveModal,
 } from "@/features/calendar/components";
 
 const CalendarPage = () => {
 	return (
 		<div className='min-h-screen bg-background text-foreground flex items-start justify-center gap-20 lg:p-6'>
-			<CalendarView />
+			<MainCalendarView />
 			<ResponsiveModal>
 				<EventsList />
 			</ResponsiveModal>

@@ -1,4 +1,4 @@
-import type { team } from "@/pages/Team/data";
+import type { team } from "../types/team";
 
 export const roleVariantMap: Record<
 	team["role"],
