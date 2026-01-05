@@ -50,6 +50,8 @@
   --color-axon-node-rose: var(--axon-node-rose);
   --color-axon-text-color: var(--axon-text-color);
   --color-scrollbar: var(--scrollbar);
+  --color-axon-dark-gray: var(--axon-dark-gray);
+  --color-axon-lighter-blue: var(--axon-lighter-blue);
 }
 
 :root {
@@ -88,15 +90,17 @@
   /* Custom logo colors - converted from your SVG HEX values */
   --axon-blue: #6FA6F0;
   --axon-light-blue: #9FB8E8;
+  --axon-lighter-blue: #D0E2FF;
   --axon-rose: #F3B8C7;
   --axon-desaturated-blue: #6B95DB;
   --axon-muted-rose: #D9A8C0;
   --axon-node-blue: #9FB8FF;
   --axon-node-rose: #E8B8C4;
-  --axon-text-color: #ffffff;
+  --axon-text-color: #2e2937;
   --axon-dark-rose: #b95174;
   --axon-gradient: linear-gradient(135deg, var(--axon-blue) 0%, var(--axon-light-blue) 60%, var(--axon-rose) 100%);
   --scrollbar: oklch(86.995% 0.0001 271.152);
+  --axon-dark-gray: #1f242d;
 }
 
 .dark {
@@ -134,15 +138,17 @@
   /* Dark mode variants of logo colors - slightly adjusted for better contrast */
   --axon-blue: #7FB0F5;
   --axon-light-blue: #AFC8F2;
+  --axon-lighter-blue: #DCE8FE;
   --axon-rose: #F8C8D2;
   --axon-desaturated-blue: #7BA5E5;
   --axon-muted-rose: #E4B8CC;
   --axon-node-blue: #AFC8FF;
   --axon-node-rose: #F2C8D4;
-  --axon-text-color: #2e2937;
+  --axon-text-color: #fff;
   --axon-dark-rose: #eb83a6;
   --axon-gradient: linear-gradient(135deg, #4e6f9e 0%, #8095b9 60%, #f9a0b2 100%);
   --scrollbar: oklch(0.269 0 0);
+  --axon-dark-gray: #1f242d;
 }
 
 /* Optional: Custom utility classes for your logo colors */

@@ -1,3 +1,4 @@
+import CalendarPage from "@/pages/Calendar";
 import HomePage from "@/pages/Home";
 import TeamPage from "@/pages/Team";
 import RootLayout from "@/shared/layout";
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "calendar",
-				element: <div>Calendar Page</div>,
+				element: <CalendarPage />,
 			},
 			{
 				path: "tasks",
