@@ -27,12 +27,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import type { team } from "@/pages/Team/data";
+import type { team } from "../types/team";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 
-import useTeam from "@/shared/hooks/team";
+import useTeam from "@/features/team/hooks/useTeam";
 import { useState, type ReactNode } from "react";
 import { z } from "zod";
 import { toast } from "sonner";

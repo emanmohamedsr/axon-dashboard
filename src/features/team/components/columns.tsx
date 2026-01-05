@@ -1,10 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import type { team } from "@/pages/Team/data";
+import type { team } from "../types/team";
 
 import type { ColumnDef } from "@tanstack/react-table";
 
-import { DataTableColumnHeader } from "@/components/data-table-column-header";
+import { DataTableColumnHeader } from "@/shared/components/ui/data-table-column-header";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -16,11 +16,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import TeamDialog from "./TeamDialog";
-import AlertDialog from "@/shared/ui/AlertDialog";
-import useTeam from "@/shared/hooks/team";
+import AlertDialog from "@/shared/components/ui/AlertDialog";
+import useTeam from "@/features/team/hooks/useTeam";
 import { useState } from "react";
-import { roleVariantMap, statusVariantMap } from "../constants";
-export const columns: ColumnDef<team>[] = [
+import { roleVariantMap, statusVariantMap } from "@/features/team/constants";
+const columns: ColumnDef<team>[] = [
 	{
 		accessorKey: "select-all",
 		header: ({ table }) => (
@@ -153,3 +153,4 @@ export const columns: ColumnDef<team>[] = [
 		},
 	},
 ];
+export default columns;

@@ -1,5 +1,5 @@
-import type { team } from "@/pages/Team/data";
-import teamData from "@/pages/Team/data";
+import teamData from "../data";
+import { type team } from "../types/team";
 import { create } from "zustand";
 
 interface teamState {

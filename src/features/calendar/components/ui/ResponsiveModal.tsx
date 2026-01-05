@@ -7,7 +7,7 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import useMediaQuery from "@/hooks/use-media-query";
+import useMediaQuery from "@/shared/hooks/use-media-query";
 import { ListCheck } from "lucide-react";
 import * as React from "react";
 

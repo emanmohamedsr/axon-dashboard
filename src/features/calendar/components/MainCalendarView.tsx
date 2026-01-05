@@ -6,14 +6,11 @@ import {
 	DialogTitle,
 } from "@/components/ui/dialog";
 import { EventForm } from "@/features/calendar/components";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import FullCalendar from "@fullcalendar/react";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import "../Styles/fullcalendar.css";
 import { images } from "../assets";
 import { useCalendarController } from "../hooks/useCalendarController";
+import FullCalendarComponent from "./NativeCalendarView";
 
 const VIEW_TYPES = [
 	{ label: "Month", value: "dayGridMonth" },
@@ -21,24 +18,17 @@ const VIEW_TYPES = [
 	{ label: "Day", value: "timeGridDay" },
 ];
 
-const CalendarView = () => {
+const MainCalendarView = () => {
 	const {
-		calendarRef,
 		currentView,
 		dateTitle,
 		isModalOpen,
 		selectedEvent,
 		selectedDateRange,
-		events,
 		setIsModalOpen,
 		handleViewChange,
 		handlePrev,
 		handleNext,
-		handleDateTitle,
-		handleEventDrop,
-		handleEventResize,
-		handleDateSelect,
-		handleEventClick,
 		handleEventSubmit,
 		handleEventDelete,
 	} = useCalendarController();
@@ -78,33 +68,7 @@ const CalendarView = () => {
 			<div className='flex-1  rounded-3xl rounded-bl-none shadow-xl border  overflow-hidden flex flex-col'>
 				<div className='flex-1 w-full overflow-x-auto overflow-y-auto'>
 					<div className='min-w-[400px] max-h-[620px]'>
-						<FullCalendar
-							ref={calendarRef}
-							plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-							headerToolbar={false}
-							initialView='dayGridMonth'
-							datesSet={handleDateTitle}
-							// -- Events
-							events={events}
-							editable={true}
-							selectable={true}
-							selectMirror={true}
-							dayMaxEvents={1}
-							eventDrop={handleEventDrop}
-							eventResize={handleEventResize}
-							select={handleDateSelect}
-							eventClick={handleEventClick}
-							// ----------
-							aspectRatio={1.5}
-							eventDisplay='block'
-							height='auto'
-							eventClassNames={(arg) => {
-								const isDone = arg.event.extendedProps.done;
-								return `border-transparent text-primary-foreground hover:opacity-90 cursor-pointer
-								${isDone ? "opacity-50 line-through grayscale" : ""}
-								`;
-							}}
-						/>
+						<FullCalendarComponent />
 					</div>
 				</div>
 			</div>
@@ -154,4 +118,4 @@ const renderViewSwitcher = (
 	));
 };
 
-export default CalendarView;
+export default MainCalendarView;
