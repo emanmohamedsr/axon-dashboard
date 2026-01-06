@@ -1,5 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuLabel,
+	DropdownMenuRadioGroup,
+	DropdownMenuRadioItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
 	Form,
 	FormControl,
@@ -60,7 +68,7 @@ const EventForm = ({
 			start: "",
 			end: "",
 			allDay: false,
-			done: false,
+			status: "pending",
 			backgroundColor: "#6FA6F0",
 			borderColor: "#fff",
 		},
@@ -91,7 +99,7 @@ const EventForm = ({
 					start: new Date(selectedEvent.start).toISOString(),
 					end: new Date(selectedEvent.end).toISOString(),
 					allDay: selectedEvent.allDay || false,
-					done: selectedEvent.done || false,
+					status: selectedEvent.status || "pending",
 					backgroundColor: selectedEvent.backgroundColor || "#6FA6F0",
 					borderColor: selectedEvent.borderColor || "#fff",
 				});
@@ -109,7 +117,7 @@ const EventForm = ({
 					start: startDate.toISOString(),
 					end: endDate.toISOString(),
 					allDay: false,
-					done: false,
+					status: "pending",
 					backgroundColor: "#6FA6F0",
 					borderColor: "#fff",
 				});
@@ -121,7 +129,7 @@ const EventForm = ({
 					start: "",
 					end: "",
 					allDay: false,
-					done: false,
+					status: "pending",
 					backgroundColor: "#6FA6F0",
 					borderColor: "#fff",
 				});
@@ -247,19 +255,37 @@ const EventForm = ({
 				{selectedEvent && (
 					<FormField
 						control={form.control}
-						name='done'
+						name='status'
 						render={({ field }) => (
 							<FormItem>
 								<FormControl>
 									<div className='flex items-center gap-3'>
-										<Checkbox
-											className='w-6 h-6 data-[state=checked]:bg-axon-blue data-[state=checked]:border-axon-blue'
-											checked={field.value}
-											onCheckedChange={field.onChange}
-											id='done'
-										/>
+										<DropdownMenu>
+											<DropdownMenuTrigger asChild>
+												<Button variant='outline'>
+													{field.value || "Select status"}
+												</Button>
+											</DropdownMenuTrigger>
+											<DropdownMenuContent className='w-56'>
+												<DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+												<DropdownMenuSeparator />
+												<DropdownMenuRadioGroup
+													value={field.value}
+													onValueChange={field.onChange}>
+													<DropdownMenuRadioItem value='done'>
+														Done
+													</DropdownMenuRadioItem>
+													<DropdownMenuRadioItem value='inprogress'>
+														In Progress
+													</DropdownMenuRadioItem>
+													<DropdownMenuRadioItem value='pending'>
+														Pending
+													</DropdownMenuRadioItem>
+												</DropdownMenuRadioGroup>
+											</DropdownMenuContent>
+										</DropdownMenu>
 										<Label htmlFor='done' className='font-semibold text-md'>
-											Mark as done
+											Status
 										</Label>
 									</div>
 								</FormControl>
