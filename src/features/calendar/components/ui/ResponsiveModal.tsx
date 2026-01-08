@@ -25,7 +25,7 @@ export default function ResponsiveModal({ children }: ResponsiveModalProps) {
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
-				<Button className='fixed top-[90px] right-4' variant={"ghost"}>
+				<Button className='absolute top-[90px] right-4' variant={"ghost"}>
 					<ListCheck />
 				</Button>
 			</SheetTrigger>

@@ -1,7 +1,7 @@
-import DataTable from "@/shared/components/ui/data-table";
 import type { team } from "../types/team";
 import useTeam from "../hooks/useTeam";
 import getColumns from "./columns";
+import { DataTable } from "@/shared/components";
 interface TeamTableProps {
 	isWidgetMode?: boolean;
 }

@@ -7,23 +7,26 @@ import {
 	DialogOverlay,
 	DialogPortal,
 	DialogTitle,
-	DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState, type ReactNode } from "react";
 import { toast } from "sonner";
 
 interface Iprops {
 	title: string;
 	description: string;
 	onSubmit: () => void;
-	children: ReactNode;
+	open: boolean;
+	setOpen: (open: boolean) => void;
 }
 
-const AlertDialog = ({ title, description, onSubmit, children }: Iprops) => {
-	const [open, setOpen] = useState(false);
+const AlertDialog = ({
+	title,
+	description,
+	onSubmit,
+	open,
+	setOpen,
+}: Iprops) => {
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogPortal>
 				<DialogOverlay className='backdrop-blur-xs' />
 				<DialogContent>
@@ -37,7 +40,7 @@ const AlertDialog = ({ title, description, onSubmit, children }: Iprops) => {
 							onClick={() => {
 								onSubmit();
 								setOpen(false);
-								toast.success("Team member deleted successfully!");
+								toast.success("Deleted successfully!");
 							}}>
 							Confirm
 						</Button>

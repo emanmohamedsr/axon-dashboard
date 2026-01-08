@@ -1,4 +1,3 @@
-import { ModeToggle } from "@/shared/components/mode-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +16,7 @@ import {
 	User,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { assets } from "../assets";
+import { images } from "../assets";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/components/ui/sidebar";
 import {
@@ -33,6 +32,7 @@ import {
 	DialogPortal,
 } from "@/components/ui/dialog";
 import { DialogTitle, DialogTrigger } from "@radix-ui/react-dialog";
+import { ModeToggle } from "../components";
 
 const Navbar = () => {
 	const { open, toggleSidebar } = useSidebar();
@@ -89,7 +89,7 @@ const Navbar = () => {
 				<DropdownMenu>
 					<DropdownMenuTrigger>
 						<Avatar className='size-6 sm:size-8 cursor-pointer'>
-							<AvatarImage src={assets.avatar} alt='avatar' />
+							<AvatarImage src={images.avatar} alt='avatar' />
 							<AvatarFallback>ES</AvatarFallback>
 						</Avatar>
 					</DropdownMenuTrigger>

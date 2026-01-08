@@ -1,4 +1,5 @@
 import { NativeCalendarView } from "@/features/calendar/components";
+import TaskTable from "@/features/tasks/components/table/TaskTable";
 import { TeamTable } from "@/features/team/components";
 
 const LandingPage = () => {
@@ -11,7 +12,9 @@ const LandingPage = () => {
 				<NativeCalendarView isWidgetMode={true} />
 			</div>
 			<div>maps</div>
-			<div>tasks</div>
+			<div>
+				<TaskTable isWidgetMode={true} />
+			</div>
 		</div>
 	);
 };

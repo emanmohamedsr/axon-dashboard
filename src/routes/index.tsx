@@ -1,5 +1,6 @@
 import CalendarPage from "@/pages/Calendar";
 import LandingPage from "@/pages/Landing";
+import TasksPage from "@/pages/Tasks";
 import TeamPage from "@/pages/Team";
 import RootLayout from "@/shared/layout";
 import { createBrowserRouter } from "react-router-dom";
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "tasks",
-				element: <div>Tasks Page</div>,
+				element: <TasksPage />,
 			},
 			{
 				path: "team",

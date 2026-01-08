@@ -23,21 +23,19 @@ import {
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import {
-	ColorPicker,
-	DatePicker,
-	DeleteEventDialog,
-} from "@/features/calendar/components";
+import { DeleteEventDialog } from "@/features/calendar/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { images } from "../../assets";
 import {
 	type EventFormValues,
 	formSchema,
 } from "../../schemas/eventFormSchema";
 import type { CalendarEvent } from "../../types";
+import DatePicker from "@/shared/components/ui/DatePicker";
+import ColorPicker from "@/shared/components/ui/ColorPicker";
+import { images } from "@/shared/assets";
 
 interface CalendarFormProps {
 	selectedEvent: CalendarEvent | null;
@@ -260,6 +258,11 @@ const EventForm = ({
 							<FormItem>
 								<FormControl>
 									<div className='flex items-center gap-3'>
+										<Label
+											htmlFor='status'
+											className='font-semibold text-md text-axon-blue'>
+											Status
+										</Label>
 										<DropdownMenu>
 											<DropdownMenuTrigger asChild>
 												<Button variant='outline'>
@@ -267,7 +270,7 @@ const EventForm = ({
 												</Button>
 											</DropdownMenuTrigger>
 											<DropdownMenuContent className='w-56'>
-												<DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+												<DropdownMenuLabel>Status Panel</DropdownMenuLabel>
 												<DropdownMenuSeparator />
 												<DropdownMenuRadioGroup
 													value={field.value}
@@ -284,9 +287,6 @@ const EventForm = ({
 												</DropdownMenuRadioGroup>
 											</DropdownMenuContent>
 										</DropdownMenu>
-										<Label htmlFor='done' className='font-semibold text-md'>
-											Status
-										</Label>
 									</div>
 								</FormControl>
 								<FormMessage />

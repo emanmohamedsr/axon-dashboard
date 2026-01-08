@@ -1,5 +1,6 @@
 import avatar from "./images/cat.jpg";
-
-export const assets = {
+import star from "./images/Star 1.svg";
+export const images = {
 	avatar,
+	star,
 };

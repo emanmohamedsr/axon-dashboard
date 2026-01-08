@@ -61,7 +61,7 @@ const NativeCalendarView = ({
 									isDone
 										? "opacity-50 line-through grayscale"
 										: inProgress
-										? "opacity-75 bg-yellow-300/20"
+										? "contrast-200"
 										: ""
 								}
 								`;

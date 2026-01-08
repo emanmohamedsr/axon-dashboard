@@ -8,9 +8,9 @@ import {
 import { EventForm } from "@/features/calendar/components";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import "../Styles/fullcalendar.css";
-import { images } from "../assets";
 import { useCalendarController } from "../hooks/useCalendarController";
 import FullCalendarComponent from "./NativeCalendarView";
+import { images } from "@/shared/assets";
 
 const VIEW_TYPES = [
 	{ label: "Month", value: "dayGridMonth" },
