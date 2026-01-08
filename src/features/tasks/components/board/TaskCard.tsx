@@ -51,7 +51,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
 			{...attributes}
 			{...listeners}
 			style={style}
-			className='rounded-md shadow-md bg-white/90 dark:bg-white/10 min-h-[170px]'>
+			className='rounded-md shadow-md bg-white/90 dark:bg-white/10 overflow-hidden'>
 			<div
 				className={`h-10 w-full rounded-t-md flex justify-end items-center px-2`}
 				style={{
@@ -75,10 +75,10 @@ const TaskCard = ({ task }: TaskCardProps) => {
 				</Button>
 			</div>
 			<div className='p-4 pt-0'>
-				<h3 className='mt-2 font-semibold text-lg text-axon-text-color'>
+				<h3 className='mt-2 font-semibold text-sm sm:text-lg text-axon-text-color'>
 					{task.name}
 				</h3>
-				<p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
+				<p className='mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400'>
 					{task.description}
 				</p>
 				{task.dueDate ? (
