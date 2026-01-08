@@ -42,7 +42,7 @@ const switchStyles = `w-[50px] h-4 md:w-[58px] md:h-5
                 data-[state=checked]:after:fade-in-0`;
 
 const EventListItem = memo(({ event, toggleDone }: EventListItemProps) => {
-	const { title, start, end, backgroundColor, done } = event;
+	const { title, start, end, backgroundColor, status } = event;
 	return (
 		<div>
 			<div className='flex flex-col gap-4 mt-2'>
@@ -54,7 +54,7 @@ const EventListItem = memo(({ event, toggleDone }: EventListItemProps) => {
 						</p>
 						<Switch
 							onCheckedChange={() => toggleDone(event.id)}
-							checked={done || false}
+							checked={status === "done"}
 							className={switchStyles}
 						/>
 					</div>

@@ -75,7 +75,7 @@ export const useCalendarController = () => {
 			start: clickInfo.event.startStr,
 			end: clickInfo.event.endStr || clickInfo.event.startStr,
 			description: clickInfo.event.extendedProps.description,
-			done: clickInfo.event.extendedProps.done,
+			status: clickInfo.event.extendedProps.status,
 			allDay: clickInfo.event.allDay,
 			backgroundColor: clickInfo.event.backgroundColor,
 			borderColor: clickInfo.event.borderColor,

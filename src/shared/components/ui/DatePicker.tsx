@@ -10,11 +10,11 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
+import { images } from "@/shared/assets";
 import { CalendarDays, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { type ControllerRenderProps } from "react-hook-form";
-import { HourPicker } from "@/features/calendar/components";
-import { images } from "../../assets";
+import HourPicker from "./HourPicker";
 
 interface DatePickerProps {
 	isRequired?: boolean;
@@ -52,7 +52,6 @@ const DatePicker = ({
 		} else {
 			fieldValidation.onChange(baseDate.toISOString().split("T")[0]);
 		}
-		console.log(baseDate.toISOString());
 	};
 
 	const handleSelectDate = (date: Date | undefined) => {
@@ -64,7 +63,6 @@ const DatePicker = ({
 			baseDate.setSeconds(0);
 
 			fieldValidation.onChange(baseDate.toISOString());
-			console.log(baseDate.toISOString());
 		}
 	};
 	// formaters

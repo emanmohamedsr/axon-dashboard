@@ -46,7 +46,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { assets } from "../assets";
+import { images } from "../assets";
 
 // Platform items.
 const items = [
@@ -251,7 +251,7 @@ const AppSidebar = () => {
 								<Avatar className={cn(!open && "size-[1.2rem]")}>
 									<AvatarImage
 										className='object-contain'
-										src={assets.avatar}
+										src={images.avatar}
 										alt='avatar'
 									/>
 									<AvatarFallback>ES</AvatarFallback>

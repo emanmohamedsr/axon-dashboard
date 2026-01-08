@@ -61,6 +61,7 @@ const TeamDialog = ({ teamMember, children, onClose }: Iprops) => {
 		},
 	});
 	const onsubmit = (data: z.infer<typeof formSchema>) => {
+		if (!teamMember) data.id = uuidv4();
 		setTeamMember(data);
 		setOpen(false);
 		form.reset();

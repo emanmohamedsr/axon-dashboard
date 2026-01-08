@@ -1,5 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuLabel,
+	DropdownMenuRadioGroup,
+	DropdownMenuRadioItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
 	Form,
 	FormControl,
@@ -15,21 +23,19 @@ import {
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import {
-	ColorPicker,
-	DatePicker,
-	DeleteEventDialog,
-} from "@/features/calendar/components";
+import { DeleteEventDialog } from "@/features/calendar/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { images } from "../../assets";
 import {
 	type EventFormValues,
 	formSchema,
 } from "../../schemas/eventFormSchema";
 import type { CalendarEvent } from "../../types";
+import DatePicker from "@/shared/components/ui/DatePicker";
+import ColorPicker from "@/shared/components/ui/ColorPicker";
+import { images } from "@/shared/assets";
 
 interface CalendarFormProps {
 	selectedEvent: CalendarEvent | null;
@@ -60,7 +66,7 @@ const EventForm = ({
 			start: "",
 			end: "",
 			allDay: false,
-			done: false,
+			status: "pending",
 			backgroundColor: "#6FA6F0",
 			borderColor: "#fff",
 		},
@@ -91,7 +97,7 @@ const EventForm = ({
 					start: new Date(selectedEvent.start).toISOString(),
 					end: new Date(selectedEvent.end).toISOString(),
 					allDay: selectedEvent.allDay || false,
-					done: selectedEvent.done || false,
+					status: selectedEvent.status || "pending",
 					backgroundColor: selectedEvent.backgroundColor || "#6FA6F0",
 					borderColor: selectedEvent.borderColor || "#fff",
 				});
@@ -109,7 +115,7 @@ const EventForm = ({
 					start: startDate.toISOString(),
 					end: endDate.toISOString(),
 					allDay: false,
-					done: false,
+					status: "pending",
 					backgroundColor: "#6FA6F0",
 					borderColor: "#fff",
 				});
@@ -121,7 +127,7 @@ const EventForm = ({
 					start: "",
 					end: "",
 					allDay: false,
-					done: false,
+					status: "pending",
 					backgroundColor: "#6FA6F0",
 					borderColor: "#fff",
 				});
@@ -247,20 +253,40 @@ const EventForm = ({
 				{selectedEvent && (
 					<FormField
 						control={form.control}
-						name='done'
+						name='status'
 						render={({ field }) => (
 							<FormItem>
 								<FormControl>
 									<div className='flex items-center gap-3'>
-										<Checkbox
-											className='w-6 h-6 data-[state=checked]:bg-axon-blue data-[state=checked]:border-axon-blue'
-											checked={field.value}
-											onCheckedChange={field.onChange}
-											id='done'
-										/>
-										<Label htmlFor='done' className='font-semibold text-md'>
-											Mark as done
+										<Label
+											htmlFor='status'
+											className='font-semibold text-md text-axon-blue'>
+											Status
 										</Label>
+										<DropdownMenu>
+											<DropdownMenuTrigger asChild>
+												<Button variant='outline'>
+													{field.value || "Select status"}
+												</Button>
+											</DropdownMenuTrigger>
+											<DropdownMenuContent className='w-56'>
+												<DropdownMenuLabel>Status Panel</DropdownMenuLabel>
+												<DropdownMenuSeparator />
+												<DropdownMenuRadioGroup
+													value={field.value}
+													onValueChange={field.onChange}>
+													<DropdownMenuRadioItem value='done'>
+														Done
+													</DropdownMenuRadioItem>
+													<DropdownMenuRadioItem value='inprogress'>
+														In Progress
+													</DropdownMenuRadioItem>
+													<DropdownMenuRadioItem value='pending'>
+														Pending
+													</DropdownMenuRadioItem>
+												</DropdownMenuRadioGroup>
+											</DropdownMenuContent>
+										</DropdownMenu>
 									</div>
 								</FormControl>
 								<FormMessage />

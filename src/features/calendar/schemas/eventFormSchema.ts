@@ -16,7 +16,7 @@ export const formSchema = z
 		allDay: z.boolean().optional(),
 		backgroundColor: z.string().optional(),
 		borderColor: z.string().optional(),
-		done: z.boolean().optional(),
+		status: z.enum(["done", "inprogress", "pending"]).optional(),
 	})
 	.refine(
 		(data) => {

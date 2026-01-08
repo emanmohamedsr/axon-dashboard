@@ -7,5 +7,7 @@ export interface CalendarEvent {
 	allDay?: boolean;
 	backgroundColor?: string;
 	borderColor?: string;
-	done?: boolean;
+	status?: statusType;
 }
+
+export type statusType = "done" | "inprogress" | "pending";

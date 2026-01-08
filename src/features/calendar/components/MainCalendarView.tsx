@@ -8,9 +8,9 @@ import {
 import { EventForm } from "@/features/calendar/components";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import "../Styles/fullcalendar.css";
-import { images } from "../assets";
 import { useCalendarController } from "../hooks/useCalendarController";
 import FullCalendarComponent from "./NativeCalendarView";
+import { images } from "@/shared/assets";
 
 const VIEW_TYPES = [
 	{ label: "Month", value: "dayGridMonth" },
@@ -31,6 +31,13 @@ const MainCalendarView = () => {
 		handleNext,
 		handleEventSubmit,
 		handleEventDelete,
+		handleDateSelect,
+		handleDateTitle,
+		handleEventClick,
+		handleEventDrop,
+		handleEventResize,
+		calendarRef,
+		events,
 	} = useCalendarController();
 
 	return (
@@ -68,7 +75,15 @@ const MainCalendarView = () => {
 			<div className='flex-1  rounded-3xl rounded-bl-none shadow-xl border  overflow-hidden flex flex-col'>
 				<div className='flex-1 w-full overflow-x-auto overflow-y-auto'>
 					<div className='min-w-[400px] max-h-[620px]'>
-						<FullCalendarComponent />
+						<FullCalendarComponent
+							calendarRef={calendarRef}
+							events={events}
+							handleDateSelect={handleDateSelect}
+							handleDateTitle={handleDateTitle}
+							handleEventClick={handleEventClick}
+							handleEventDrop={handleEventDrop}
+							handleEventResize={handleEventResize}
+						/>
 					</div>
 				</div>
 			</div>

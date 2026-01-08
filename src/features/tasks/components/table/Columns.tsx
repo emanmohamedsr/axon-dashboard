@@ -1,6 +1,5 @@
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import type { team } from "../types/team";
 
 import type { ColumnDef } from "@tanstack/react-table";
 
@@ -13,15 +12,18 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { roleVariantMap, statusVariantMap } from "@/features/team/constants";
-import useTeam from "@/features/team/hooks/useTeam";
-import { AlertDialog, DataTableColumnHeader } from "@/shared/components";
-import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
+import { DataTableColumnHeader } from "@/shared/components";
+import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useState } from "react";
-import TeamDialog from "./TeamDialog";
+import useTaskAlertStore from "../../hooks/useTaskAlertStore";
+import useTaskModalStore from "../../hooks/useTaskModalStore";
+import type { Task } from "../../types/task";
+import { TaskPriorityMapping, TaskStatusMapping } from "../../utils";
 
-const getColumns = (isWidgetMode: boolean = false): ColumnDef<team>[] => {
-	const columns: ColumnDef<team>[] = [
+const getColumns = (isWidgetMode: boolean = false): ColumnDef<Task>[] => {
+	const { setSelectedTask, onOpenChange } = useTaskAlertStore();
+
+	const columns: ColumnDef<Task>[] = [
 		{
 			id: "select-all",
 			accessorKey: "select-all",
@@ -55,11 +57,11 @@ const getColumns = (isWidgetMode: boolean = false): ColumnDef<team>[] => {
 			cell: (info) => info.getValue(),
 		},
 		{
-			accessorKey: "email",
+			accessorKey: "description",
 			header: ({ column }) => (
 				<DataTableColumnHeader
 					column={column}
-					title='Email'
+					title='Description'
 					className='text-axon-blue font-bold text-lg'
 				/>
 			),
@@ -75,17 +77,17 @@ const getColumns = (isWidgetMode: boolean = false): ColumnDef<team>[] => {
 				/>
 			),
 			cell: (info) => (
-				<span className={statusVariantMap[info.getValue() as team["status"]]}>
+				<span className={TaskStatusMapping[info.getValue() as Task["status"]]}>
 					{info.getValue() as string}
 				</span>
 			),
 		},
 		{
-			accessorKey: "role",
+			accessorKey: "priority",
 			header: ({ column }) => (
 				<DataTableColumnHeader
 					column={column}
-					title='Role'
+					title='Priority'
 					className='text-axon-rose text-center font-bold text-lg'
 				/>
 			),
@@ -94,7 +96,7 @@ const getColumns = (isWidgetMode: boolean = false): ColumnDef<team>[] => {
 				return (
 					<Badge
 						className='w-20'
-						variant={roleVariantMap[info.getValue() as team["role"]]}>
+						variant={TaskPriorityMapping[info.getValue() as Task["priority"]]}>
 						{info.getValue() as string}
 					</Badge>
 				);
@@ -104,8 +106,16 @@ const getColumns = (isWidgetMode: boolean = false): ColumnDef<team>[] => {
 			id: "actions",
 			enableHiding: false,
 			cell: ({ row }) => {
-				const teamMember = row.original;
-				const deleteTeamMember = useTeam((state) => state.deleteTeamMember);
+				const task = row.original;
+				const handleDeleteTask = () => {
+					onOpenChange(true);
+					setSelectedTask(task);
+				};
+				const { onEditModalOpenChange, setTaskToEdit } = useTaskModalStore();
+				const handleEditTask = () => {
+					onEditModalOpenChange(true);
+					setTaskToEdit(task);
+				};
 				const [open, setOpen] = useState(false);
 				return (
 					<DropdownMenu open={open} onOpenChange={setOpen}>
@@ -120,34 +130,21 @@ const getColumns = (isWidgetMode: boolean = false): ColumnDef<team>[] => {
 								Actions
 							</DropdownMenuLabel>
 							<DropdownMenuSeparator />
-							<DropdownMenuItem
-								onClick={() => navigator.clipboard.writeText(teamMember.email)}>
-								<Copy className='w-[1.2rem] h-[1.2rem]' />
-								Copy Email
+							<DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+								<div
+									className='flex items-center gap-2'
+									onClick={handleEditTask}>
+									<Edit className='w-[1.2rem] h-[1.2rem]' />
+									<span>Edit</span>
+								</div>
 							</DropdownMenuItem>
 							<DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-								<TeamDialog
-									onClose={() => setOpen(false)}
-									teamMember={teamMember}>
-									<div className='flex items-center gap-2'>
-										<Edit className='w-[1.2rem] h-[1.2rem]' />
-										<span>Edit</span>
-									</div>
-								</TeamDialog>
-							</DropdownMenuItem>
-							<DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-								<AlertDialog
-									title='Delete Team Member'
-									description='Are you sure you want to delete this team member? This action cannot be undone.'
-									onSubmit={() => {
-										deleteTeamMember(row.original.id);
-										setOpen(false);
-									}}>
-									<div className='flex items-center gap-2'>
-										<Trash className='w-[1.2rem] h-[1.2rem] text-destructive' />
-										<span className='text-destructive'>Delete</span>
-									</div>
-								</AlertDialog>
+								<div
+									className='flex items-center gap-2'
+									onClick={handleDeleteTask}>
+									<Trash className='w-[1.2rem] h-[1.2rem] text-destructive' />
+									<span className='text-destructive'>Delete</span>
+								</div>
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>

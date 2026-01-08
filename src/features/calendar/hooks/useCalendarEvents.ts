@@ -62,7 +62,9 @@ const useCalendarEvents = create<EventsState>((set) => ({
 	toggleDone: (id) =>
 		set((state) => ({
 			events: state.events.map((event) =>
-				event.id === id ? { ...event, done: !event.done } : event,
+				event.id === id
+					? { ...event, status: event.status === "done" ? "pending" : "done" }
+					: event,
 			),
 		})),
 }));
