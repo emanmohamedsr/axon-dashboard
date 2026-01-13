@@ -25,6 +25,7 @@ const KanbanBoard = ({ isWidgetMode = false }: KanbanBoardProps) => {
 				}`}>
 				{BOARD_COLUMNS.map((column) => (
 					<BoardColumn
+						isWidgetMode={isWidgetMode}
 						key={column.id}
 						title={column.title}
 						status={column.id as TaskStatus}

@@ -13,8 +13,9 @@ import type { MouseEvent, PointerEvent } from "react";
 import useTaskModalStore from "../../hooks/useTaskModalStore";
 interface TaskCardProps {
 	task: Task;
+	isWidgetMode?: boolean;
 }
-const TaskCard = ({ task }: TaskCardProps) => {
+const TaskCard = ({ task, isWidgetMode = false }: TaskCardProps) => {
 	const { setSelectedTask, onOpenChange } = useTaskAlertStore();
 	const handleDeleteTask = (event: MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
@@ -58,6 +59,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
 					backgroundColor: task.bgColor,
 				}}>
 				<Button
+					disabled={isWidgetMode}
 					onPointerDown={stopDragPropagation}
 					onClick={handleEditTask}
 					variant='ghost'
@@ -66,6 +68,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
 					<Edit className='w-4 h-4 text-gray-600 dark:text-gray-400' />
 				</Button>
 				<Button
+					disabled={isWidgetMode}
 					onPointerDown={stopDragPropagation}
 					onClick={handleDeleteTask}
 					variant='ghost'
