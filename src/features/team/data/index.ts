@@ -1,7 +1,10 @@
+import { images } from "@/shared/assets";
 import type { TeamMember } from "../types/team-member";
+import { teamImages } from "../assets";
 
 const teamData: TeamMember[] = [
 	{
+		avatarUrl: images.avatar,
 		id: "4108fe75-f3d5-4204-89f4-f96e293c57e7",
 		name: "Eman Soliman",
 		email: "eman.soliman@example.com",
@@ -11,9 +14,11 @@ const teamData: TeamMember[] = [
 			displayName: "Zagazig, Egypt",
 			lat: 30.58768,
 			lng: 31.502,
+			timeZone: "Africa/Cairo",
 		},
 	},
 	{
+		avatarUrl: teamImages.team1,
 		id: "2de561fb-e7bc-414d-b8b4-e5c3c33d6742",
 		name: "Zola",
 		email: "Davonte47@yahoo.com",
@@ -23,9 +28,11 @@ const teamData: TeamMember[] = [
 			displayName: "New York, USA",
 			lat: 40.7128,
 			lng: -74.006,
+			timeZone: "America/New_York",
 		},
 	},
 	{
+		avatarUrl: teamImages.team2,
 		id: "e11aa852-c5ce-4375-a660-f9ee2c571436",
 		name: "Gage",
 		email: "Kale_Homenick55@yahoo.com",
@@ -35,6 +42,7 @@ const teamData: TeamMember[] = [
 			displayName: "London, UK",
 			lat: 51.5074,
 			lng: -0.1278,
+			timeZone: "Europe/London",
 		},
 	},
 	{
@@ -47,9 +55,11 @@ const teamData: TeamMember[] = [
 			displayName: "Rome, Italy",
 			lat: 41.9028,
 			lng: 12.4964,
+			timeZone: "Europe/Rome",
 		},
 	},
 	{
+		avatarUrl: teamImages.team3,
 		id: "3203e6d2-cca3-40f3-a560-b83ba2770b4d",
 		name: "Retha",
 		email: "Elwyn.Howell71@yahoo.com",
@@ -59,9 +69,11 @@ const teamData: TeamMember[] = [
 			displayName: "Berlin, Germany",
 			lat: 52.52,
 			lng: 13.405,
+			timeZone: "Europe/Berlin",
 		},
 	},
 	{
+		avatarUrl: teamImages.team4,
 		id: "46e597db-73db-4db4-bd85-1004b0e4e346",
 		name: "Gregory",
 		email: "Delpha.Wisoky3@yahoo.com",
@@ -71,9 +83,11 @@ const teamData: TeamMember[] = [
 			displayName: "Paris, France",
 			lat: 48.8566,
 			lng: 2.3522,
+			timeZone: "Europe/Paris",
 		},
 	},
 	{
+		avatarUrl: teamImages.team5,
 		id: "b3c16ee6-e23b-4ff2-a00b-965c252d39ce",
 		name: "Gwendolyn",
 		email: "Jerad.Kreiger19@hotmail.com",
@@ -83,9 +97,11 @@ const teamData: TeamMember[] = [
 			displayName: "Dubai, UAE",
 			lat: 25.2048,
 			lng: 55.2708,
+			timeZone: "Asia/Dubai",
 		},
 	},
 	{
+		avatarUrl: teamImages.team2,
 		id: "6ac1a9a1-b263-4346-84f3-bcb47b07c582",
 		name: "Elaina",
 		email: "Dolores.Shanahan@hotmail.com",
@@ -95,6 +111,7 @@ const teamData: TeamMember[] = [
 			displayName: "Toronto, Canada",
 			lat: 43.65107,
 			lng: -79.347015,
+			timeZone: "America/Toronto",
 		},
 	},
 	{
@@ -107,9 +124,11 @@ const teamData: TeamMember[] = [
 			displayName: "Sydney, Australia",
 			lat: -33.8688,
 			lng: 151.2093,
+			timeZone: "Australia/Sydney",
 		},
 	},
 	{
+		avatarUrl: teamImages.team5,
 		id: "8045de0d-a792-4be4-b1b2-36464009f590",
 		name: "Emelie",
 		email: "Taurean_Satterfield-Feeney50@yahoo.com",
@@ -119,6 +138,7 @@ const teamData: TeamMember[] = [
 			displayName: "Tokyo, Japan",
 			lat: 35.6762,
 			lng: 139.6503,
+			timeZone: "Asia/Tokyo",
 		},
 	},
 	{
@@ -131,18 +151,7 @@ const teamData: TeamMember[] = [
 			displayName: "San Francisco, USA",
 			lat: 37.7749,
 			lng: -122.4194,
-		},
-	},
-	{
-		id: "7e3fd472-9e73-49c2-8c2d-ec857a46c91a",
-		name: "Alford",
-		email: "Quinten49@hotmail.com",
-		role: "Analyst",
-		status: "Banned",
-		location: {
-			displayName: "Cairo, Egypt",
-			lat: 30.0444,
-			lng: 31.2357,
+			timeZone: "America/Los_Angeles",
 		},
 	},
 ];

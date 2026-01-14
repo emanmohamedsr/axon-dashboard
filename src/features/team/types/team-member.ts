@@ -3,6 +3,7 @@ import type { Location } from "@/shared/types/Location";
 export type TeamMember = {
 	id: string;
 	name: string;
+	avatarUrl?: string;
 	email: string;
 	role: "Admin" | "Designer" | "Developer" | "Analyst";
 	status: "Active" | "Inactive" | "Pending" | "Banned";

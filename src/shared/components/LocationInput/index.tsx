@@ -1,5 +1,5 @@
 import { Check, ChevronsUpDown } from "lucide-react";
-
+import tzlookup from "tz-lookup";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,10 +37,19 @@ const LocationInput = ({
 	const handleSelect = (item: NominatinResponse) => {
 		setOpen(false);
 		setSearchText("");
+		const lat = parseFloat(item.lat);
+		const lng = parseFloat(item.lon);
+		let detectedTimeZone = "UTC";
+		try {
+			detectedTimeZone = tzlookup(lat, lng);
+		} catch (error) {
+			console.error("Error detecting time zone:", error);
+		}
 		const userLocation: Location = {
 			displayName: item.display_name,
-			lat: parseFloat(item.lat),
-			lng: parseFloat(item.lon),
+			lat,
+			lng,
+			timeZone: detectedTimeZone,
 		};
 		setSelectedLocation(userLocation);
 	};
