@@ -148,7 +148,7 @@ const TaskDialog = ({ task, open, onOpenChange, onClose }: Iprops) => {
 								control={form.control}
 								name='dueDate'
 								render={({ field }) => (
-									<FormItem className='block w-full flex flex-col gap-2'>
+									<FormItem className='w-full flex flex-col gap-2'>
 										<FormLabel>Due Date</FormLabel>
 										<FormControl>
 											<DatePicker disabled fieldValidation={field} />
