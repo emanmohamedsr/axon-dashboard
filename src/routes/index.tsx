@@ -1,4 +1,5 @@
 import CalendarPage from "@/pages/Calendar";
+import ConnectionsMapPage from "@/pages/ConnectionsMap";
 import LandingPage from "@/pages/Landing";
 import TasksPage from "@/pages/Tasks";
 import TeamPage from "@/pages/Team";
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "maps",
-				element: <div>Maps Page</div>,
+				element: <ConnectionsMapPage />,
 			},
 			{
 				path: "notifications/system",

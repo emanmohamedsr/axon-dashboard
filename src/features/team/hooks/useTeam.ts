@@ -1,16 +1,16 @@
 import teamData from "../data";
-import { type team } from "../types/team";
+import { type TeamMember } from "../types/team-member";
 import { create } from "zustand";
 
 interface teamState {
-	team: team[];
-	setTeamMember: (member: team) => void;
+	team: TeamMember[];
+	setTeamMember: (member: TeamMember) => void;
 	deleteTeamMember: (id: string) => void;
 }
 
 const useTeam = create<teamState>((set) => ({
 	team: teamData,
-	setTeamMember: (member: team) =>
+	setTeamMember: (member: TeamMember) =>
 		set((state) => {
 			const isExisting = state.team.findIndex((t) => t.id === member.id);
 			if (isExisting === -1) {

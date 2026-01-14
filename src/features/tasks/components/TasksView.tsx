@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import KanbanBoard from "./board/kanbanBoard";
 import TaskTable from "./table/TaskTable";
 import TaskDeleteAlert from "./TaskDeleteAlert";
 import TaskEditAddDialog from "./TaskEditAddDialog";
 import useTaskModalStore from "../hooks/useTaskModalStore";
+import { KanbanBoard } from "@/features/tasks/components";
 const TasksView = () => {
 	const { onEditModalOpenChange, setTaskToEdit } = useTaskModalStore();
 	const handleAddNewTask = () => {

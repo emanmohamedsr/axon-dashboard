@@ -18,7 +18,6 @@ import {
 	SidebarGroupLabel,
 	SidebarHeader,
 	SidebarMenu,
-	SidebarMenuAction,
 	SidebarMenuBadge,
 	SidebarMenuButton,
 	SidebarMenuItem,
@@ -28,8 +27,8 @@ import {
 	SidebarSeparator,
 	useSidebar,
 } from "@/components/ui/sidebar";
-import { useIsMobile } from "@/shared/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/shared/hooks/use-mobile";
 import {
 	Activity,
 	Calendar,
@@ -38,7 +37,6 @@ import {
 	Home,
 	LogOut,
 	Map,
-	MoreHorizontal,
 	Settings,
 	SquareCheckBig,
 	User,
@@ -196,25 +194,12 @@ const AppSidebar = () => {
 											isActive && "bg-axon-gradient",
 										)}>
 										<Map className='w-[1.2rem] h-[1.2rem]' />
-										<span className='font-semibold font-lg'>Maps</span>
+										<span className='font-semibold font-lg'>
+											Connection Map
+										</span>
 									</SidebarMenuButton>
 								)}
 							</NavLink>
-							<DropdownMenu>
-								<DropdownMenuTrigger asChild>
-									<SidebarMenuAction>
-										<MoreHorizontal />
-									</SidebarMenuAction>
-								</DropdownMenuTrigger>
-								<DropdownMenuContent side='right' align='start'>
-									<DropdownMenuItem>
-										<span>Edit</span>
-									</DropdownMenuItem>
-									<DropdownMenuItem>
-										<span>View</span>
-									</DropdownMenuItem>
-								</DropdownMenuContent>
-							</DropdownMenu>
 						</SidebarMenuItem>
 					</SidebarGroup>
 

@@ -4,12 +4,18 @@ import TaskCard from "./TaskCard";
 import { ListTodo } from "lucide-react";
 
 interface BoardColumnProps {
+	isWidgetMode?: boolean;
 	status: TaskStatus;
 	title: string;
 	tasks: Task[];
 }
 
-const BoardColumn = ({ status, title, tasks }: BoardColumnProps) => {
+const BoardColumn = ({
+	isWidgetMode = false,
+	status,
+	title,
+	tasks,
+}: BoardColumnProps) => {
 	const { isOver, setNodeRef } = useDroppable({
 		id: status,
 	});
@@ -17,9 +23,9 @@ const BoardColumn = ({ status, title, tasks }: BoardColumnProps) => {
 	return (
 		<div
 			ref={setNodeRef}
-			className={` shadow-md
+			className={`shadow-md
 				bg-gray-100 dark:bg-white/10
-        flex flex-col gap-4 p-4 rounded-lg min-h-[500px] border-2
+        flex flex-col gap-4 p-4 rounded-lg border-2
         ${
 					isOver
 						? "bg-axon-lighter-blue border-axon-blue"
@@ -37,7 +43,7 @@ const BoardColumn = ({ status, title, tasks }: BoardColumnProps) => {
 			)}
 
 			{tasks.map((task) => (
-				<TaskCard key={task.id} task={task} />
+				<TaskCard key={task.id} task={task} isWidgetMode={isWidgetMode} />
 			))}
 		</div>
 	);

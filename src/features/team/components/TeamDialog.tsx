@@ -27,7 +27,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import type { team } from "../types/team";
+import type { TeamMember } from "../types/team-member";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
@@ -36,20 +36,24 @@ import useTeam from "@/features/team/hooks/useTeam";
 import { useState, type ReactNode } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
+import LocationInput from "@/shared/components/LocationInput";
+import { Label } from "@/components/ui/label";
 const formSchema = z.object({
 	email: z.string().email(),
 	name: z.string().min(2).max(100),
 	id: z.string(),
 	role: z.enum(["Admin", "Designer", "Developer", "Analyst"]),
 	status: z.enum(["Active", "Inactive", "Pending", "Banned"]),
+	location: z.string().optional(),
 });
 
 interface Iprops {
-	teamMember?: team;
+	teamMember?: TeamMember;
 	children: ReactNode;
 	onClose?: () => void;
 }
 const TeamDialog = ({ teamMember, children, onClose }: Iprops) => {
+	const [location, setLocation] = useState(teamMember?.location || undefined);
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -58,11 +62,12 @@ const TeamDialog = ({ teamMember, children, onClose }: Iprops) => {
 			role: teamMember?.role || "Developer",
 			status: teamMember?.status || "Active",
 			id: teamMember?.id || uuidv4(),
+			location: teamMember?.location?.displayName || "",
 		},
 	});
 	const onsubmit = (data: z.infer<typeof formSchema>) => {
 		if (!teamMember) data.id = uuidv4();
-		setTeamMember(data);
+		setTeamMember({ ...data, location });
 		setOpen(false);
 		form.reset();
 		onClose?.();
@@ -121,6 +126,15 @@ const TeamDialog = ({ teamMember, children, onClose }: Iprops) => {
 									</FormItem>
 								)}
 							/>
+
+							{/* Location */}
+							<Label>
+								Location
+								<LocationInput
+									selectedLocation={location}
+									setSelectedLocation={setLocation}
+								/>
+							</Label>
 
 							<div className='flex items-center gap-4 flex-wrap'>
 								{/* Role */}

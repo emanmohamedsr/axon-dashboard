@@ -1,7 +1,7 @@
-import type { team } from "../types/team";
+import type { TeamMember } from "../types/team-member";
 
 export const roleVariantMap: Record<
-	team["role"],
+	TeamMember["role"],
 	"primary" | "default" | "secondary" | "destructive" | "outline"
 > = {
 	Admin: "destructive",
@@ -10,7 +10,7 @@ export const roleVariantMap: Record<
 	Analyst: "default",
 };
 
-export const statusVariantMap: Record<team["status"], string> = {
+export const statusVariantMap: Record<TeamMember["status"], string> = {
 	Active: "text-green-600 dark:text-green-400",
 	Inactive: "text-red-600 dark:text-red-400",
 	Pending: "text-yellow-600 dark:text-yellow-400",
