@@ -9,12 +9,16 @@ import "leaflet/dist/leaflet.css";
 import { Mail, MapPin } from "lucide-react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
-const MapMainView = () => {
+interface MapMainViewProps {
+	isWideView?: boolean;
+}
+
+const MapMainView = ({ isWideView = false }: MapMainViewProps) => {
 	const teamMembers = useTeam().team;
 	return (
 		<MapContainer
-			center={[51.505, -0.09]}
-			zoom={2}
+			center={isWideView ? [30.58768, 31.502] : [51.505, -0.09]}
+			zoom={isWideView ? 4 : 2}
 			scrollWheelZoom={false}
 			className={`h-[calc(100vh-90px)] w-full min-h-[500px] rounded-lg z-0 shadow-md`}>
 			<TileLayer
@@ -30,57 +34,59 @@ const MapMainView = () => {
 							<Marker
 								key={member.id}
 								position={[member.location.lat, member.location.lng]}>
-								<Popup className='custom-popup-clean'>
-									<div className='w-[220px] p-1'>
-										<div className='flex items-start gap-3 mb-3'>
-											<Avatar className='w-10 h-10 border-2 border-white shadow-sm'>
-												<AvatarImage
-													src={member.avatarUrl || images.fallbackAvararImage}
-												/>
-												<AvatarFallback>
-													{member.name.substring(0, 2).toUpperCase()}
-												</AvatarFallback>
-											</Avatar>
+								{!isWideView && (
+									<Popup className='custom-popup-clean'>
+										<div className='w-[220px] p-1'>
+											<div className='flex items-start gap-3 mb-3'>
+												<Avatar className='w-10 h-10 border-2 border-white shadow-sm'>
+													<AvatarImage
+														src={member.avatarUrl || images.fallbackAvatarImage}
+													/>
+													<AvatarFallback>
+														{member.name.substring(0, 2).toUpperCase()}
+													</AvatarFallback>
+												</Avatar>
 
-											<div className='flex flex-col'>
-												<h3 className='font-bold text-sm text-gray-900 leading-none'>
-													{member.name}
-												</h3>
-												<p
-													className={`text-[10px] px-2 h-5 ${
-														statusVariantMap[member.status]
-													}`}>
-													{member.status}
-												</p>
-											</div>
-										</div>
-
-										<div className='space-y-3 mb-3'>
-											<div className='flex items-center justify-between'>
-												<Badge variant={roleVariantMap[member.role]}>
-													{member.role}
-												</Badge>
-												<div className='flex items-center text-[10px] text-gray-500 gap-1'>
-													<MapPin className='w-3 h-3 text-sky-700' />
-													{member.location?.displayName.split(",")[0]}
+												<div className='flex flex-col'>
+													<h3 className='font-bold text-sm text-gray-900 leading-none'>
+														{member.name}
+													</h3>
+													<p
+														className={`text-[10px] px-2 h-5 ${
+															statusVariantMap[member.status]
+														}`}>
+														{member.status}
+													</p>
 												</div>
 											</div>
 
-											<LocalTimeClock timeZone={member.location.timeZone} />
-										</div>
+											<div className='space-y-3 mb-3'>
+												<div className='flex items-center justify-between'>
+													<Badge variant={roleVariantMap[member.role]}>
+														{member.role}
+													</Badge>
+													<div className='flex items-center text-[10px] text-gray-500 gap-1'>
+														<MapPin className='w-3 h-3 text-sky-700' />
+														{member.location?.displayName.split(",")[0]}
+													</div>
+												</div>
 
-										<div className='grid grid-cols-1'>
-											<Button size='sm' variant='outline' className='w-full'>
-												<a
-													href={`mailto:${member.email}`}
-													className='h-7 text-xs w-full gap-2 flex justify-center items-center'>
-													<Mail className='w-3 h-3' />
-													Email {member.name.split(" ")[0]}
-												</a>
-											</Button>
+												<LocalTimeClock timeZone={member.location.timeZone} />
+											</div>
+
+											<div className='grid grid-cols-1'>
+												<Button size='sm' variant='outline' className='w-full'>
+													<a
+														href={`mailto:${member.email}`}
+														className='h-7 text-xs w-full gap-2 flex justify-center items-center'>
+														<Mail className='w-3 h-3' />
+														Email {member.name.split(" ")[0]}
+													</a>
+												</Button>
+											</div>
 										</div>
-									</div>
-								</Popup>
+									</Popup>
+								)}
 							</Marker>
 						),
 				)}
