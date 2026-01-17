@@ -7,25 +7,67 @@ import { images } from "@/shared/assets";
 import LocalTimeClock from "@/shared/components/LocalTimeClock";
 import "leaflet/dist/leaflet.css";
 import { Mail, MapPin } from "lucide-react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-
+import { useEffect, useState } from "react";
+import {
+	MapContainer,
+	Marker,
+	Polyline,
+	Popup,
+	TileLayer,
+} from "react-leaflet";
+import "../index.css";
+import getCurvedPath from "../utils/curved-path";
 interface MapMainViewProps {
 	isWideView?: boolean;
 }
 
+const HQ_POSITION: [number, number] = [30.0444, 31.2357];
 const MapMainView = ({ isWideView = false }: MapMainViewProps) => {
 	const teamMembers = useTeam().team;
+	const [mounted, setMounted] = useState(false);
+	useEffect(() => setMounted(true), []);
+
+	const lineOptions = {
+		color: "#7FB0F5",
+		weight: 2,
+		opacity: 0.8,
+		dashArray: "5, 10",
+		lineCap: "round" as const,
+	};
+
+	if (!mounted)
+		return <div className='h-full w-full bg-muted animate-pulse rounded-xl' />;
 	return (
 		<MapContainer
-			center={isWideView ? [30.58768, 31.502] : [51.505, -0.09]}
-			zoom={isWideView ? 4 : 2}
+			center={isWideView ? [30.58768, 31.502] : HQ_POSITION}
+			zoom={isWideView ? 3 : 2.5}
 			scrollWheelZoom={false}
 			className={`h-[calc(100vh-90px)] w-full min-h-[500px] rounded-lg z-0 shadow-md`}>
 			<TileLayer
-				className='contrast-100 dark:contrast-75'
-				url='https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}'
-				attribution='Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC'
+				className='contrast-100 dark:invert'
+				url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
 			/>
+
+			{teamMembers &&
+				teamMembers.map((member) => {
+					const isHQ =
+						member.location?.lat === HQ_POSITION[0] &&
+						member.location?.lng === HQ_POSITION[1];
+					const curvePoints = getCurvedPath(HQ_POSITION, [
+						member.location?.lat || 0,
+						member.location?.lng || 0,
+					]);
+					return (
+						!isHQ &&
+						member.location && (
+							<Polyline
+								key={member.id}
+								pathOptions={lineOptions}
+								positions={curvePoints}
+							/>
+						)
+					);
+				})}
 
 			{teamMembers &&
 				teamMembers.map(

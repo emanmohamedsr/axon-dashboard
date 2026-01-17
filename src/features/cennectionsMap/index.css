@@ -1,0 +1,14 @@
+.leaflet-overlay-pane path {
+  stroke-dasharray: 6, 12;
+  animation: dash 30s linear infinite;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 200;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}

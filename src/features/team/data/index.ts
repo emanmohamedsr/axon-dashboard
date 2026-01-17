@@ -11,9 +11,9 @@ const teamData: TeamMember[] = [
 		role: "Admin",
 		status: "Active",
 		location: {
-			displayName: "Zagazig, Egypt",
-			lat: 30.58768,
-			lng: 31.502,
+			displayName: "Cairo, Egypt",
+			lat: 30.0444,
+			lng: 31.2357,
 			timeZone: "Africa/Cairo",
 		},
 	},
