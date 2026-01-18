@@ -44,7 +44,14 @@ const LandingPage = () => {
 				</div>
 			</div>
 
-			<div className={`${cardStyle} col-span-1 lg:col-span-2`}>
+			<div className={`${cardStyle} col-span-1`}>
+				<div className={widgetHeaderStyle}>
+					<CalendarDays className='h-4 w-4' />
+					<span>Schedule</span>
+				</div>
+			</div>
+
+			<div className={`${cardStyle} col-span-1 xl:col-span-2`}>
 				<div className={widgetHeaderStyle}>
 					<Globe className='h-4 w-4' />
 					<span>Global Connections</span>
@@ -58,16 +65,6 @@ const LandingPage = () => {
 
 			<div className={`${cardStyle} col-span-1`}>
 				<div className={widgetHeaderStyle}>
-					<BarChart3 className='h-4 w-4' />
-					<span>Time Zone Distribution</span>
-				</div>
-				<div className={widgetContentStyle}>
-					<TimeZoneDistribution />
-				</div>
-			</div>
-
-			<div className={`${cardStyle} col-span-1`}>
-				<div className={widgetHeaderStyle}>
 					<PieChart className='h-4 w-4' />
 					<span>Team Status</span>
 				</div>
@@ -76,7 +73,17 @@ const LandingPage = () => {
 				</div>
 			</div>
 
-			<div className={`${cardStyle} col-span-1 lg:col-span-3 2xl:col-span-2`}>
+			<div className={`${cardStyle} col-span-1`}>
+				<div className={widgetHeaderStyle}>
+					<BarChart3 className='h-4 w-4' />
+					<span>Time Zone Distribution</span>
+				</div>
+				<div className={widgetContentStyle}>
+					<TimeZoneDistribution />
+				</div>
+			</div>
+
+			<div className={`${cardStyle} col-span-1 lg:col-span-2 2xl:col-span-2`}>
 				<div className={widgetHeaderStyle}>
 					<Users className='h-4 w-4' />
 					<span>Team Members</span>

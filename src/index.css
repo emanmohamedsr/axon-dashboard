@@ -96,7 +96,7 @@
   --axon-muted-rose: #D9A8C0;
   --axon-node-blue: #9FB8FF;
   --axon-node-rose: #E8B8C4;
-  --axon-text-color: #bbb;
+  --axon-text-color: #1f242d;
   --axon-dark-rose: #b95174;
   --axon-gradient: linear-gradient(135deg, var(--axon-blue) 0%, var(--axon-light-blue) 60%, var(--axon-rose) 100%);
   --scrollbar: oklch(86.995% 0.0001 271.152);
