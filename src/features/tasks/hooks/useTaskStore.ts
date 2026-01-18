@@ -68,9 +68,9 @@ const useTask = create<TaskState>((set) => ({
 	setTask: (task) =>
 		set((state) => ({
 			tasks:
-				state.tasks.findIndex((t) => t.id === task.id) !== -1
-					? [...state.tasks.map((t) => (t.id === task.id ? task : t))]
-					: [task, ...state.tasks],
+				state.tasks.findIndex((t) => t.id === task.id) !== -1 ?
+					[...state.tasks.map((t) => (t.id === task.id ? task : t))]
+				:	[task, ...state.tasks],
 		})),
 	deleteTask: (id) =>
 		set((state) => ({

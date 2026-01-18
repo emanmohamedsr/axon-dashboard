@@ -1,7 +1,7 @@
-import MapMainView from "@/features/cennectionsMap/components/MapMainView";
+import MapView from "@/features/cennectionsMap/components/MapView";
 
 const ConnectionsMapPage = () => {
-	return <MapMainView />;
+	return <MapView />;
 };
 
 export default ConnectionsMapPage;
