@@ -19,9 +19,9 @@ const KanbanBoard = ({ isWidgetMode = false }: KanbanBoardProps) => {
 		return (
 			<div
 				className={`grid gap-6 h-full ${
-					isWidgetMode
-						? "grid-cols-1 max-h-[500px] overflow-auto"
-						: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+					isWidgetMode ?
+						"grid-cols-1 max-h-[325px] overflow-auto"
+					:	"grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
 				}`}>
 				{BOARD_COLUMNS.map((column) => (
 					<BoardColumn

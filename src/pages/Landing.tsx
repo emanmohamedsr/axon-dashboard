@@ -2,8 +2,11 @@ import { NativeCalendarView } from "@/features/calendar/components";
 import TeamStatus from "@/features/cennectionsMap/charts/TeamStatus";
 import TimeZoneDistribution from "@/features/cennectionsMap/charts/TimeZoneDistribution";
 import MapMainView from "@/features/cennectionsMap/components/MapMainView";
+import TasksStackedBar from "@/features/tasks/charts/TasksStackedBar";
+import TaskStatusRadial from "@/features/tasks/charts/TaskStatusRadial";
 import { KanbanBoard } from "@/features/tasks/components";
 import { TeamTable } from "@/features/team/components";
+import { cn } from "@/lib/utils";
 import {
 	CalendarDays,
 	Globe,
@@ -24,7 +27,8 @@ const LandingPage = () => {
 
 	return (
 		<div className='grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-4 p-4 items-start bg-muted/10 min-h-screen'>
-			<div className={`${cardStyle} col-span-1`}>
+			{/* tasks */}
+			<div className={cn(cardStyle, "col-span-1 h-[400px]")}>
 				<div className={widgetHeaderStyle}>
 					<KanbanSquare className='h-4 w-4' />
 					<span>Tasks Overview</span>
@@ -33,8 +37,27 @@ const LandingPage = () => {
 					<KanbanBoard isWidgetMode={true} />
 				</div>
 			</div>
+			<div className={cn(cardStyle, "col-span-1 h-[400px]")}>
+				<div className={widgetHeaderStyle}>
+					<PieChart className='h-4 w-4' />
+					<span>Tasks Status</span>
+				</div>
+				<div className={widgetContentStyle}>
+					<TasksStackedBar />
+				</div>
+			</div>
+			<div className={cn(cardStyle, "col-span-1 h-[400px]")}>
+				<div className={widgetHeaderStyle}>
+					<PieChart className='h-4 w-4' />
+					<span>Tasks Stackedbar</span>
+				</div>
+				<div className={widgetContentStyle}>
+					<TaskStatusRadial />
+				</div>
+			</div>
 
-			<div className={`${cardStyle} col-span-1`}>
+			{/* calendar */}
+			<div className={cn(cardStyle, "col-span-2")}>
 				<div className={widgetHeaderStyle}>
 					<CalendarDays className='h-4 w-4' />
 					<span>Schedule</span>
@@ -43,7 +66,6 @@ const LandingPage = () => {
 					<NativeCalendarView isWidgetMode={true} />
 				</div>
 			</div>
-
 			<div className={`${cardStyle} col-span-1`}>
 				<div className={widgetHeaderStyle}>
 					<CalendarDays className='h-4 w-4' />
@@ -51,7 +73,8 @@ const LandingPage = () => {
 				</div>
 			</div>
 
-			<div className={`${cardStyle} col-span-1 xl:col-span-2`}>
+			{/* connections */}
+			<div className={cn(cardStyle, "col-span-2 xl:col-span-2")}>
 				<div className={widgetHeaderStyle}>
 					<Globe className='h-4 w-4' />
 					<span>Global Connections</span>
@@ -62,7 +85,6 @@ const LandingPage = () => {
 					</div>
 				</div>
 			</div>
-
 			<div className={`${cardStyle} col-span-1`}>
 				<div className={widgetHeaderStyle}>
 					<PieChart className='h-4 w-4' />
@@ -72,8 +94,8 @@ const LandingPage = () => {
 					<TeamStatus />
 				</div>
 			</div>
-
-			<div className={`${cardStyle} col-span-1`}>
+			{/* team */}
+			<div className={cn(cardStyle, "col-span-1")}>
 				<div className={widgetHeaderStyle}>
 					<BarChart3 className='h-4 w-4' />
 					<span>Time Zone Distribution</span>
@@ -82,8 +104,7 @@ const LandingPage = () => {
 					<TimeZoneDistribution />
 				</div>
 			</div>
-
-			<div className={`${cardStyle} col-span-1 lg:col-span-2 2xl:col-span-2`}>
+			<div className={cn(cardStyle, "col-span-1 lg:col-span-2 2xl:col-span-2")}>
 				<div className={widgetHeaderStyle}>
 					<Users className='h-4 w-4' />
 					<span>Team Members</span>
