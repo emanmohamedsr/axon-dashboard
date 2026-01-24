@@ -23,13 +23,14 @@ const BoardColumn = ({
 	return (
 		<div
 			ref={setNodeRef}
-			className={`shadow-md
-				bg-gray-100 dark:bg-white/10
-        flex flex-col gap-4 p-4 rounded-lg border-2
+			className={`overflow-y-auto shadow-md
+				bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10
+        flex flex-col gap-4 p-4 rounded-lg border
+				${isWidgetMode ? "h-[600px]" : "h-[540px]"}
         ${
-					isOver
-						? "bg-axon-lighter-blue border-axon-blue"
-						: "bg-gray-100/50 border-transparent"
+					isOver ?
+						"bg-axon-lighter-blue border-axon-blue"
+					:	"bg-gray-100/50 border-transparent"
 				}
         transition-colors
       `}>
@@ -42,9 +43,13 @@ const BoardColumn = ({
 				</div>
 			)}
 
-			{tasks.map((task) => (
-				<TaskCard key={task.id} task={task} isWidgetMode={isWidgetMode} />
-			))}
+			<div className='flex-1 overflow-y-auto'>
+				<div className='flex flex-col gap-3 p-2'>
+					{tasks.map((task) => (
+						<TaskCard key={task.id} task={task} isWidgetMode={isWidgetMode} />
+					))}
+				</div>
+			</div>
 		</div>
 	);
 };

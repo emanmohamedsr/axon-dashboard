@@ -95,16 +95,20 @@ const AppSidebar = () => {
 			<SidebarHeader className='py-4'>
 				<SidebarMenu>
 					<SidebarMenuButton asChild>
-						<Link to={"/"}>
+						<Link to={"/"} className='relative'>
 							<img
 								className={cn(
-									"bg-transparent object-cover rounded-full",
-									!open ? "size-[1.2rem]" : "size-10",
+									"object-cover size-[42px]",
+									!open ? "absolute -ml-2" : "relative",
 								)}
-								src='/logo.svg'
+								src='/axon.png'
 								alt='logo'
 							/>
-							<span className='bg-linear-to-r from-[#6FA6F0] via-[#9FB8E8] to-[#F3B8C7] bg-clip-text text-transparent font-bold -ml-1 text-xl tracking-wide'>
+							<span
+								className={cn(
+									"bg-linear-to-r from-[#6FA6F0] via-[#9FB8E8] to-[#F3B8C7] bg-clip-text text-transparent font-bold -ml-1 text-xl tracking-wide",
+									!open && "hidden",
+								)}>
 								Axon
 							</span>
 						</Link>
