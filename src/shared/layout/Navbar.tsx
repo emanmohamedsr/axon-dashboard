@@ -83,7 +83,11 @@ const Navbar = () => {
 				<ModeToggle />
 				{/* logo */}
 				<Link to={"/"}>
-					<img className='object-cover w-6 sm:w-8' src='/logo.svg' alt='logo' />
+					<img
+						className='object-cover size-8 sm:size-10'
+						src='/axon.png'
+						alt='logo'
+					/>
 				</Link>
 				{/* profile dropdown */}
 				<DropdownMenu>
