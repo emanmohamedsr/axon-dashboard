@@ -1,6 +1,6 @@
 import type { Task } from "../types/task";
 
-const chartColors = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)"];
+const chartColors = ["var(--chart-1)", "var(--chart-4)", "var(--chart-5)"];
 export const TaskStatusCount = (tasks: Task[]) => {
 	const statusCount: Record<"done" | "in-progress" | "todo", number> = {
 		done: 0,

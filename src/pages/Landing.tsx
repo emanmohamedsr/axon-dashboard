@@ -1,3 +1,4 @@
+import EventsHistogram from "@/features/calendar/charts/EventsHistogram";
 import { NativeCalendarView } from "@/features/calendar/components";
 import TeamStatus from "@/features/cennectionsMap/charts/TeamStatus";
 import TimeZoneDistribution from "@/features/cennectionsMap/charts/TimeZoneDistribution";
@@ -70,6 +71,9 @@ const LandingPage = () => {
 				<div className={widgetHeaderStyle}>
 					<CalendarDays className='h-4 w-4' />
 					<span>Schedule</span>
+				</div>
+				<div className={widgetContentStyle}>
+					<EventsHistogram className='h-full' />
 				</div>
 			</div>
 

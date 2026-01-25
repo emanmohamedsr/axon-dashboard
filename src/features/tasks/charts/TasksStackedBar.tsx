@@ -77,13 +77,13 @@ export default function TasksStackedBar() {
 						<Bar
 							dataKey='inProgress'
 							stackId='a'
-							fill='var(--chart-4)'
+							fill='var(--chart-5)'
 							radius={[4, 4, 0, 0]}
 						/>
 						<Bar
 							dataKey='todo'
 							stackId='a'
-							fill='var(--chart-5)'
+							fill='var(--chart-4)'
 							radius={[4, 4, 0, 0]}
 						/>
 					</BarChart>
