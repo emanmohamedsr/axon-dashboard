@@ -33,11 +33,11 @@ const chartConfig = {
 	},
 	InProgress: {
 		label: "In Progress",
-		color: "var(--chart-2)",
+		color: "var(--chart-4)",
 	},
 	Todo: {
 		label: "To Do",
-		color: "var(--chart-3)",
+		color: "var(--chart-5)",
 	},
 } satisfies ChartConfig;
 

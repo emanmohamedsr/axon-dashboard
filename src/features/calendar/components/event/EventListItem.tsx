@@ -1,7 +1,6 @@
 import { Switch } from "@/components/ui/switch";
 import { CalendarDays } from "lucide-react";
 import { images } from "../../assets";
-import { getColorName } from "../../lib/colorsUtils";
 import type { CalendarEvent } from "../../types";
 import { memo } from "react";
 
@@ -94,18 +93,13 @@ const EventListItem = memo(({ event, toggleDone }: EventListItemProps) => {
 								</div>
 
 								{/* Color Text */}
-								<div className='flex flex-col'>
+								<div className='flex items-center gap-2'>
 									<p className='text-[#cccccc] text-xs md:text-sm font-medium'>
 										Color
 									</p>
-									<div className='flex items-center gap-2'>
-										<div
-											className='w-4 h-4 rounded-full'
-											style={{ backgroundColor }}></div>
-										<p className='text-axon-text-color font-bold text-xs md:text-sm leading-tight'>
-											{getColorName(backgroundColor!)}
-										</p>
-									</div>
+									<div
+										className='w-4 h-4 rounded-full'
+										style={{ backgroundColor }}></div>
 								</div>
 							</div>
 						</div>

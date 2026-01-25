@@ -1,7 +1,6 @@
 import { create } from "zustand";
-import { v4 as uuidv4 } from "uuid";
 import type { CalendarEvent } from "../types";
-
+import events from "../data/eventsMockData";
 export interface EventsState {
 	events: CalendarEvent[];
 	resizeEvent: (id: string, newEnd: string | Date) => void;
@@ -17,29 +16,7 @@ export interface EventsState {
 }
 
 const useCalendarEvents = create<EventsState>((set) => ({
-	events: [
-		{
-			id: uuidv4(),
-			title: "Design Review",
-			description: "Review the new app design mockups.",
-			start: new Date().toISOString().split("T")[0],
-			end: new Date().toISOString().split("T")[0],
-			allDay: true,
-			backgroundColor: "#3B82F6",
-			borderColor: "#fff",
-		},
-		{
-			id: uuidv4(),
-			title: "Meeting with Team",
-			start: new Date(
-				new Date().setDate(new Date().getDate() + 2),
-			).toISOString(),
-			end: new Date(new Date().setDate(new Date().getDate() + 2)).toISOString(),
-			allDay: true,
-			backgroundColor: "#10B981",
-			borderColor: "#fff",
-		},
-	],
+	events,
 	resizeEvent: (id, newEnd) =>
 		set((state) => ({
 			events: state.events.map((event) =>
@@ -62,9 +39,9 @@ const useCalendarEvents = create<EventsState>((set) => ({
 	toggleDone: (id) =>
 		set((state) => ({
 			events: state.events.map((event) =>
-				event.id === id
-					? { ...event, status: event.status === "done" ? "pending" : "done" }
-					: event,
+				event.id === id ?
+					{ ...event, status: event.status === "done" ? "pending" : "done" }
+				:	event,
 			),
 		})),
 }));

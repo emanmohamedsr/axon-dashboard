@@ -1,4 +1,4 @@
-import teamData from "../data";
+import teamData from "../data/teamMockData";
 import { type TeamMember } from "../types/team-member";
 import { create } from "zustand";
 
