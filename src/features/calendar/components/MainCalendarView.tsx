@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { EventForm } from "@/features/calendar/components";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
-import "../Styles/fullcalendar.css";
+import "../styles/fullcalendar.css";
 import { useCalendarController } from "../hooks/useCalendarController";
 import FullCalendarComponent from "./NativeCalendarView";
 import { images } from "@/shared/assets";
@@ -124,9 +124,9 @@ const renderViewSwitcher = (
 			key={view.value}
 			onClick={() => handleViewChange(view.value)}
 			className={`sm:w-20 p-2 cursor-pointer font-bold text-sm sm:leading-6 rounded-xl transition-all ${
-				currentView === view.value
-					? "bg-axon-gradient shadow-sm"
-					: "bg-axon-lighter-blue dark:bg-axon-dark-gray hover:opacity-80"
+				currentView === view.value ?
+					"bg-axon-gradient shadow-sm"
+				:	"bg-axon-lighter-blue dark:bg-axon-dark-gray hover:opacity-80"
 			}`}>
 			{view.label}
 		</button>
