@@ -1,7 +1,15 @@
-import { DndContext, type DragEndEvent } from "@dnd-kit/core";
+// KanbanBoard.tsx
+import {
+	DndContext,
+	DragOverlay,
+	type DragEndEvent,
+	type DragStartEvent,
+} from "@dnd-kit/core";
 import BoardColumn from "./BoardColumn";
 import type { Task, TaskStatus } from "../../types/task";
 import useTask from "../../hooks/useTaskStore";
+import { useState } from "react";
+import TaskCard from "./TaskCard";
 
 interface KanbanBoardProps {
 	isWidgetMode?: boolean;
@@ -10,11 +18,33 @@ interface KanbanBoardProps {
 const KanbanBoard = ({ isWidgetMode = false }: KanbanBoardProps) => {
 	const { tasks, setTask } = useTask();
 
+	const [activeTask, setActiveTask] = useState<Task | null>(null);
+
 	const BOARD_COLUMNS = [
 		{ id: "todo", title: "To Do" },
 		{ id: "in-progress", title: "In Progress" },
 		{ id: "done", title: "Done" },
 	];
+
+	const handleDragStart = (event: DragStartEvent) => {
+		const { active } = event;
+		if (active.data.current) {
+			setActiveTask(active.data.current as Task);
+		}
+	};
+
+	const handleDragEnd = (event: DragEndEvent) => {
+		const { active, over } = event;
+
+		setActiveTask(null);
+
+		if (!over) return;
+		const newStatus = over.id;
+		const currentTask = active.data.current as Task;
+		if (currentTask && currentTask.status !== newStatus)
+			setTask({ ...currentTask, status: newStatus as TaskStatus });
+	};
+
 	const RenderBoardColumns = () => {
 		return (
 			<div
@@ -36,17 +66,19 @@ const KanbanBoard = ({ isWidgetMode = false }: KanbanBoardProps) => {
 		);
 	};
 
-	const handleDragEnd = (event: DragEndEvent) => {
-		const { active, over } = event;
-		if (!over) return;
-		const newStatus = over.id;
-		const currentTask = active.data.current as Task;
-		if (currentTask && currentTask.status !== newStatus)
-			setTask({ ...currentTask, status: newStatus as TaskStatus });
-	};
-
 	return (
-		<DndContext onDragEnd={handleDragEnd}>{RenderBoardColumns()}</DndContext>
+		<DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
+			{RenderBoardColumns()}
+			<DragOverlay>
+				{activeTask ?
+					<TaskCard
+						task={activeTask}
+						isWidgetMode={isWidgetMode}
+						isOverlay={true}
+					/>
+				:	null}
+			</DragOverlay>
+		</DndContext>
 	);
 };
 export default KanbanBoard;
