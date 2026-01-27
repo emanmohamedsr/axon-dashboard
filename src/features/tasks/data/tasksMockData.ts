@@ -3,7 +3,7 @@ import type { Task, TaskStatus } from "../types/task";
 import { daysFromNow, pastDate } from "../utils/getPrePostDays";
 
 const StatusColors: Record<TaskStatus, string> = {
-	todo: "#DBEAFE",
+	todo: "var(--axon-blue)",
 	"in-progress": "#FEF3C7",
 	done: "#D1FAE5",
 };

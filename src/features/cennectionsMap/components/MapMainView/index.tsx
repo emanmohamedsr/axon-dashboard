@@ -15,6 +15,12 @@ import {
 	Popup,
 	TileLayer,
 } from "react-leaflet";
+
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import L from "leaflet";
+
 import "./index.css";
 import getCurvedPath from "../../utils/curved-path";
 import { Card } from "@/components/ui/card";
@@ -27,7 +33,15 @@ const HQ_POSITION: [number, number] = [30.0444, 31.2357];
 const MapMainView = ({ isWideView = false }: MapMainViewProps) => {
 	const teamMembers = useTeam().team;
 	const [mounted, setMounted] = useState(false);
-	useEffect(() => setMounted(true), []);
+	useEffect(() => {
+		delete (L.Icon.Default.prototype as any)._getIconUrl;
+		setMounted(true);
+		L.Icon.Default.mergeOptions({
+			iconUrl: markerIcon,
+			iconRetinaUrl: markerIcon2x,
+			shadowUrl: markerShadow,
+		});
+	}, []);
 
 	const lineOptions = {
 		color: "#7FB0F5",
