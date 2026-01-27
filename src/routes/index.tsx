@@ -1,6 +1,7 @@
 import CalendarPage from "@/pages/Calendar";
 import ChatbotPage from "@/pages/Chatbot";
 import ConnectionsMapPage from "@/pages/ConnectionsMap";
+import ErrorFallbackPage from "@/pages/Error";
 import LandingPage from "@/pages/Landing";
 import NotFoundPage from "@/pages/NotFound";
 import TasksPage from "@/pages/Tasks";
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <RootLayout />,
-		errorElement: <div>Error occurred!</div>,
+		errorElement: <ErrorFallbackPage />,
 		children: [
 			{
 				index: true,
