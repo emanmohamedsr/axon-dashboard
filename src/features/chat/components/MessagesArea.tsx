@@ -34,11 +34,11 @@ export default function MessagesArea({ onStartChat }: MessagesAreaProps) {
 
 		if (!input.trim() || isLoading) return;
 
+		setInput("");
+
 		await sendMessage({
 			text: input,
 		});
-
-		setInput("");
 	};
 
 	return (
@@ -67,6 +67,7 @@ export default function MessagesArea({ onStartChat }: MessagesAreaProps) {
 
 								{/* Message Bubble */}
 								<div
+									ref={messagesEndRef}
 									className={`p-3.5 rounded-2xl text-sm leading-relaxed max-w-[80%] ${
 										m.role === "user" ?
 											"bg-white text-black rounded-tr-sm shadow-sm"
@@ -117,7 +118,6 @@ export default function MessagesArea({ onStartChat }: MessagesAreaProps) {
 								</Button>
 							</div>
 						)}
-						<div ref={messagesEndRef} />
 					</div>
 				</div>
 			</div>
