@@ -43,12 +43,10 @@ const BoardColumn = ({
 				</div>
 			)}
 
-			<div className='flex-1 overflow-y-auto'>
-				<div className='flex flex-col gap-3 p-2'>
-					{tasks.map((task) => (
-						<TaskCard key={task.id} task={task} isWidgetMode={isWidgetMode} />
-					))}
-				</div>
+			<div className='z-0 flex flex-col gap-3 p-2'>
+				{tasks.map((task) => (
+					<TaskCard key={task.id} task={task} isWidgetMode={isWidgetMode} />
+				))}
 			</div>
 		</div>
 	);

@@ -9,7 +9,7 @@ export default [
 		start: new Date().toISOString().split("T")[0],
 		end: new Date().toISOString().split("T")[0],
 		allDay: true,
-		backgroundColor: "var(--chart-1)",
+		backgroundColor: "#2586d6",
 		borderColor: "transparent",
 	},
 	{
@@ -18,7 +18,7 @@ export default [
 		start: createDateInCurrentMonth(1, 9, 0).split("T")[0],
 		end: createDateInCurrentMonth(1, 17, 0).split("T")[0],
 		allDay: true,
-		backgroundColor: "var(--chart-2)",
+		backgroundColor: "#85c0d3",
 	},
 
 	{
@@ -27,7 +27,7 @@ export default [
 		start: createDateInCurrentMonth(currentDay + 1, 9, 30),
 		end: createDateInCurrentMonth(currentDay + 1, 10, 0),
 		allDay: false,
-		backgroundColor: "var(--chart-3)",
+		backgroundColor: "#dd98a3",
 	},
 	{
 		id: uuidv4(),
@@ -35,7 +35,7 @@ export default [
 		start: createDateInCurrentMonth(5, 14, 0),
 		end: createDateInCurrentMonth(5, 14, 45),
 		allDay: false,
-		backgroundColor: "var(--chart-4)",
+		backgroundColor: "#b69ad6",
 	},
 
 	{
@@ -44,7 +44,7 @@ export default [
 		start: createDateInCurrentMonth(18, 10, 0),
 		end: createDateInCurrentMonth(18, 11, 30),
 		allDay: false,
-		backgroundColor: "var(--chart-5)",
+		backgroundColor: "#81b4ed",
 	},
 
 	{
@@ -53,7 +53,7 @@ export default [
 		start: createDateInCurrentMonth(22, 13, 0),
 		end: createDateInCurrentMonth(22, 16, 30),
 		allDay: false,
-		backgroundColor: "var(--axon-desaturated-blue)",
+		backgroundColor: "#6B95DB",
 	},
 	{
 		id: uuidv4(),
@@ -61,7 +61,7 @@ export default [
 		start: createDateInCurrentMonth(25, 15, 0),
 		end: createDateInCurrentMonth(25, 17, 30),
 		allDay: false,
-		backgroundColor: "var(--axon-node-blue)",
+		backgroundColor: "#9FB8FF",
 	},
 
 	{
@@ -71,6 +71,6 @@ export default [
 		start: createDateInCurrentMonth(12, 22, 0),
 		end: createDateInCurrentMonth(13, 3, 0),
 		allDay: false,
-		backgroundColor: "var(--destructive)",
+		backgroundColor: "#e7000b",
 	},
 ];
