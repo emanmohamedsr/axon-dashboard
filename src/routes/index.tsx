@@ -2,6 +2,7 @@ import CalendarPage from "@/pages/Calendar";
 import ChatbotPage from "@/pages/Chatbot";
 import ConnectionsMapPage from "@/pages/ConnectionsMap";
 import LandingPage from "@/pages/Landing";
+import NotFoundPage from "@/pages/NotFound";
 import TasksPage from "@/pages/Tasks";
 import TeamPage from "@/pages/Team";
 import RootLayout from "@/shared/layout";
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "*",
-		element: <div>Not such a page</div>,
+		element: <NotFoundPage />,
 	},
 ]);
 export default router;
