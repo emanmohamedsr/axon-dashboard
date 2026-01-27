@@ -1,10 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-	Collapsible,
-	CollapsibleContent,
-	CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
@@ -18,21 +13,15 @@ import {
 	SidebarGroupLabel,
 	SidebarHeader,
 	SidebarMenu,
-	SidebarMenuBadge,
 	SidebarMenuButton,
 	SidebarMenuItem,
-	SidebarMenuSub,
-	SidebarMenuSubButton,
-	SidebarMenuSubItem,
 	SidebarSeparator,
 	useSidebar,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 import {
-	Activity,
 	Calendar,
-	ChartArea,
 	ChevronUp,
 	Home,
 	LogOut,
@@ -42,7 +31,6 @@ import {
 	User,
 	UsersRound,
 } from "lucide-react";
-import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { images } from "../assets";
 
@@ -70,26 +58,9 @@ const items = [
 	},
 ];
 
-// Statistics charts items.
-const statsChartItems = [
-	{
-		title: "Line Charts",
-		url: "/charts/line",
-	},
-	{
-		title: "Bar Charts",
-		url: "/charts/bar",
-	},
-	{
-		title: "Pie Charts",
-		url: "/charts/pie",
-	},
-];
-
 const AppSidebar = () => {
 	const isMobile = useIsMobile();
 	const { open } = useSidebar();
-	const [openCollapsedGroup3, setOpenCollapsedGroup3] = useState(false);
 	return (
 		<Sidebar variant='floating' collapsible='icon'>
 			<SidebarHeader className='py-4'>
@@ -143,51 +114,6 @@ const AppSidebar = () => {
 					</SidebarGroup>
 
 					<SidebarGroup>
-						<SidebarGroupLabel className='font-bold'>
-							Statistics
-						</SidebarGroupLabel>
-						<Collapsible
-							open={openCollapsedGroup3}
-							onOpenChange={setOpenCollapsedGroup3}
-							className='group/collapsible'>
-							<SidebarMenuItem>
-								<CollapsibleTrigger asChild>
-									<SidebarMenuButton className='font-medium text-md'>
-										<ChartArea />
-										charts
-										<ChevronUp
-											className={cn(
-												"ml-auto transition-all",
-												openCollapsedGroup3 ? "rotate-0" : "rotate-180",
-											)}
-										/>
-									</SidebarMenuButton>
-								</CollapsibleTrigger>
-								<CollapsibleContent>
-									<SidebarMenuSub>
-										{statsChartItems.map((item) => (
-											<SidebarMenuSubItem key={item.title}>
-												<NavLink to={item.url}>
-													{({ isActive }) => (
-														<SidebarMenuSubButton
-															asChild
-															className={cn(
-																"cursor-pointer",
-																isActive && "bg-axon-gradient",
-															)}>
-															<span>{item.title}</span>
-														</SidebarMenuSubButton>
-													)}
-												</NavLink>
-											</SidebarMenuSubItem>
-										))}
-									</SidebarMenuSub>
-								</CollapsibleContent>
-							</SidebarMenuItem>
-						</Collapsible>
-					</SidebarGroup>
-
-					<SidebarGroup>
 						<SidebarGroupLabel className='font-bold'>Portals</SidebarGroupLabel>
 						<SidebarMenuItem>
 							<NavLink to='/maps'>
@@ -208,22 +134,32 @@ const AppSidebar = () => {
 					</SidebarGroup>
 
 					<SidebarGroup>
-						<SidebarGroupLabel className='font-semibold font-lg'>
-							Notifications
+						<SidebarGroupLabel className='font-bold'>
+							AI Assistant
 						</SidebarGroupLabel>
 						<SidebarMenuItem>
-							<NavLink to='/notifications/system'>
+							<NavLink to='/ai-assistant'>
 								{({ isActive }) => (
 									<SidebarMenuButton
 										className={cn(
 											"cursor-pointer flex items-center gap-2",
 											isActive && "bg-axon-gradient",
 										)}>
-										<Activity className='w-[1.2rem] h-[1.2rem] ' />
-										System
-										<SidebarMenuBadge className='cursor-pointer'>
-											24
-										</SidebarMenuBadge>
+										<img
+											className={cn(
+												"object-cover size-8",
+												!open ? "absolute -ml-2" : "relative",
+											)}
+											src={images.eve}
+											alt='eve'
+										/>
+										<span
+											className={cn(
+												"-ml-2 text-md font-semibold",
+												!open && "hidden",
+											)}>
+											Eve
+										</span>
 									</SidebarMenuButton>
 								)}
 							</NavLink>

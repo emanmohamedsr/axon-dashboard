@@ -1,4 +1,5 @@
 import CalendarPage from "@/pages/Calendar";
+import ChatbotPage from "@/pages/Chatbot";
 import ConnectionsMapPage from "@/pages/ConnectionsMap";
 import LandingPage from "@/pages/Landing";
 import TasksPage from "@/pages/Tasks";
@@ -29,32 +30,12 @@ const router = createBrowserRouter([
 				element: <TeamPage />,
 			},
 			{
-				path: "profile",
-				element: <div>Profile Page</div>,
-			},
-			{
-				path: "settings",
-				element: <div>Settings Page</div>,
-			},
-			{
-				path: "charts/bar",
-				element: <div>Bar Charts Page</div>,
-			},
-			{
-				path: "charts/pie",
-				element: <div>Pie Charts Page</div>,
-			},
-			{
-				path: "charts/line",
-				element: <div>Line Charts Page</div>,
+				path: "ai-assistant",
+				element: <ChatbotPage />,
 			},
 			{
 				path: "maps",
 				element: <ConnectionsMapPage />,
-			},
-			{
-				path: "notifications/system",
-				element: <div>System Notifications Page</div>,
 			},
 		],
 	},

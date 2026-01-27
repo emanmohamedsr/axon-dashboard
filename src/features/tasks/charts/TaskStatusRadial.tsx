@@ -41,9 +41,41 @@ const chartConfig = {
 	},
 } satisfies ChartConfig;
 
-export default function TaskStatusRadial() {
+interface TaskStatusRadialProps {
+	isWidgetMode?: boolean;
+}
+
+export default function TaskStatusRadial({
+	isWidgetMode = false,
+}: TaskStatusRadialProps) {
 	const tasks = useTask().tasks;
 	const chartData = useMemo(() => TaskStatusCount(tasks), [tasks]);
+	if (isWidgetMode)
+		return (
+			<ChartContainer
+				config={chartConfig}
+				className='mx-auto aspect-square max-h-[250px]'>
+				<RadialBarChart
+					data={chartData}
+					startAngle={-90}
+					endAngle={380}
+					innerRadius={30}
+					outerRadius={110}>
+					<ChartTooltip
+						cursor={false}
+						content={<ChartTooltipContent hideLabel nameKey='status' />}
+					/>
+					<RadialBar dataKey='count' background>
+						<LabelList
+							position='insideStart'
+							dataKey='status'
+							className='fill-white capitalize mix-blend-luminosity'
+							fontSize={11}
+						/>
+					</RadialBar>
+				</RadialBarChart>
+			</ChartContainer>
+		);
 	return (
 		<Card className='flex flex-col'>
 			<CardHeader className='items-center pb-0'>
