@@ -1,6 +1,6 @@
-# <img src="public/axon.png" alt="Axon" width="70" style="vertical-align: middle;"/> Axon
+# <img src="public/axon.png" alt="Axon" width="60" style="vertical-align: middle;"/> Axon
 
-[![Live Demo](https://vercel.com/button)](******)
+[![Live Demo](https://vercel.com/button)](https://axon-dashboard-wpvz.vercel.app/)
 
 ![Status](https://img.shields.io/badge/Status-Production-success?style=for-the-badge)
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge)
