@@ -7,30 +7,24 @@ import { AlertTriangle, RefreshCcw, Home, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ErrorFallbackPage = () => {
-	const error = useRouteError(); // 👈 ده هو "اللاقط" الجديد للأخطاء
+	const error = useRouteError();
 	const navigate = useNavigate();
 
-	// دالة عشان نستخرج رسالة الخطأ بشكل آمن
 	let errorMessage = "Unknown error occurred";
 	let errorStack = "No stack trace available";
 
 	if (isRouteErrorResponse(error)) {
-		// لو الخطأ جاي من Router (زي 404 أو 500)
 		errorMessage = `${error.status} ${error.statusText}`;
 		errorStack = error.data?.message || "Route Error";
 	} else if (error instanceof Error) {
-		// لو خطأ JavaScript عادي
 		errorMessage = error.message;
 		errorStack = error.stack || "";
 	} else if (typeof error === "string") {
 		errorMessage = error;
 	}
 
-	// دالة الريسيت (هنا هنعمل Reload للصفحة أو نرجع للهوم)
 	const handleReset = () => {
-		// الخيار ليكِ: يا إما Reload كامل عشان ينضف الميموري
 		window.location.reload();
-		// أو نرجع للهوم: navigate("/", { replace: true });
 	};
 
 	return (
