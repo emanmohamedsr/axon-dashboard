@@ -23,8 +23,11 @@ import {
 	totalActiveMembers,
 } from "../utils/PieChartAnalytics";
 import { chartColors, createChartConfig } from "../constants";
+interface TeamStatusProps {
+	isWidgetMode?: boolean;
+}
 
-export default function TeamStatus() {
+export default function TeamStatus({ isWidgetMode = false }: TeamStatusProps) {
 	const teamMembers = useTeam().team;
 
 	const chartData = useMemo(() => {
@@ -46,6 +49,31 @@ export default function TeamStatus() {
 		() => totalActiveMembers(teamMembers),
 		[teamMembers],
 	);
+
+	if (isWidgetMode)
+		return (
+			<ChartContainer
+				config={chartConfig}
+				className='mx-auto aspect-square max-h-[250px]'>
+				<PieChart>
+					<ChartTooltip
+						cursor={false}
+						content={<ChartTooltipContent hideLabel />}
+					/>
+					<Pie
+						data={chartData}
+						dataKey='count'
+						nameKey='status'
+						innerRadius={60}
+						strokeWidth={5}
+						activeIndex={activeIndex}
+						activeShape={({ outerRadius = 0, ...props }: any) => (
+							<Sector {...props} outerRadius={outerRadius + 10} />
+						)}
+					/>
+				</PieChart>
+			</ChartContainer>
+		);
 
 	return (
 		<Card className='flex flex-col w-full h-full'>

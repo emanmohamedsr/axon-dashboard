@@ -33,14 +33,38 @@ const chartConfig = {
 
 interface EventsHistogramProps {
 	className?: string;
+	isWidgetMode?: boolean;
 }
 
-export default function EventsHistogram({ className }: EventsHistogramProps) {
+export default function EventsHistogram({
+	className,
+	isWidgetMode = false,
+}: EventsHistogramProps) {
 	const events = useCalendarEvents().events;
 	const chartData = useMemo(
 		() => getEventsHistogramAnalytics(events),
 		[events],
 	);
+	if (isWidgetMode)
+		return (
+			<ChartContainer config={chartConfig}>
+				<BarChart accessibilityLayer data={chartData}>
+					<CartesianGrid vertical={false} />
+					<XAxis
+						dataKey='hours'
+						tickLine={false}
+						tickMargin={10}
+						axisLine={false}
+						tickFormatter={(value) => value.slice(0, 3)}
+					/>
+					<ChartTooltip
+						cursor={false}
+						content={<ChartTooltipContent hideLabel />}
+					/>
+					<Bar dataKey='count' fill='var(--color-desktop)' radius={8} />
+				</BarChart>
+			</ChartContainer>
+		);
 	return (
 		<Card
 			className={cn("bg-background rounded-md shadow-xl border", className)}>

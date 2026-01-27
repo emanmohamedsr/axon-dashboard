@@ -30,7 +30,13 @@ import { useMemo } from "react";
 import getMembersByRegion, { totalMembers } from "../utils/BarChartanAnalytics";
 import { chartColors, createChartConfig } from "../constants";
 
-export default function TimeZoneDistribution() {
+interface TimeZoneDistributionProps {
+	isWidgetMode?: boolean;
+}
+
+export default function TimeZoneDistribution({
+	isWidgetMode = false,
+}: TimeZoneDistributionProps) {
 	const teamMembers = useTeam().team;
 
 	const chartData = useMemo(() => {
@@ -49,6 +55,58 @@ export default function TimeZoneDistribution() {
 	}, [chartData]);
 
 	const totalCount = useMemo(() => totalMembers(chartData), [chartData]);
+
+	if (isWidgetMode)
+		return (
+			<ChartContainer config={chartConfig}>
+				<BarChart
+					accessibilityLayer
+					data={chartData}
+					layout='vertical'
+					barCategoryGap='10%'
+					margin={{ right: 16 }}>
+					<CartesianGrid horizontal={false} />
+
+					<YAxis
+						dataKey='region'
+						type='category'
+						tickLine={false}
+						tickMargin={10}
+						axisLine={false}
+						hide
+					/>
+
+					<XAxis dataKey='members' type='number' hide />
+
+					<ChartTooltip
+						cursor={false}
+						content={<ChartTooltipContent indicator='line' />}
+					/>
+
+					<Bar dataKey='members' layout='vertical' radius={4} barSize={32}>
+						{chartData.map((e, index) => (
+							<Cell key={`cell-${index}`} fill={e.fill} />
+						))}
+
+						<LabelList
+							dataKey='region'
+							position='insideLeft'
+							offset={8}
+							className='fill-white'
+							fontSize={12}
+						/>
+
+						<LabelList
+							dataKey='members'
+							position='right'
+							offset={8}
+							className='fill-foreground'
+							fontSize={12}
+						/>
+					</Bar>
+				</BarChart>
+			</ChartContainer>
+		);
 
 	return (
 		<Card className='h-full w-full flex flex-col'>

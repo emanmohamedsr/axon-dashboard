@@ -43,11 +43,53 @@ const chartConfig = {
 	},
 } satisfies ChartConfig;
 
-export default function TasksStackedBar() {
+interface TasksStackedBarProps {
+	isWidgetMode?: boolean;
+}
+
+export default function TasksStackedBar({
+	isWidgetMode = false,
+}: TasksStackedBarProps) {
 	const tasks = useTask().tasks;
 
 	const chartData = useMemo(() => getTasksPriorityStatusData(tasks), [tasks]);
 	const totalDoneTasks = useMemo(() => getTotalDoneTasks(tasks), [tasks]);
+
+	if (isWidgetMode)
+		return (
+			<ChartContainer config={chartConfig}>
+				<BarChart accessibilityLayer data={chartData}>
+					<CartesianGrid vertical={false} />
+					<XAxis
+						dataKey='priority'
+						tickLine={false}
+						tickMargin={10}
+						axisLine={false}
+						tickFormatter={(value) => value.slice(0, 3)}
+					/>
+					<ChartTooltip content={<ChartTooltipContent hideLabel />} />
+					<ChartLegend content={<ChartLegendContent />} />
+					<Bar
+						dataKey='done'
+						stackId='a'
+						fill='var(--chart-1)'
+						radius={[0, 0, 4, 4]}
+					/>
+					<Bar
+						dataKey='inProgress'
+						stackId='a'
+						fill='var(--chart-5)'
+						radius={[4, 4, 0, 0]}
+					/>
+					<Bar
+						dataKey='todo'
+						stackId='a'
+						fill='var(--chart-4)'
+						radius={[4, 4, 0, 0]}
+					/>
+				</BarChart>
+			</ChartContainer>
+		);
 
 	return (
 		<Card>
