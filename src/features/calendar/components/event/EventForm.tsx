@@ -23,19 +23,19 @@ import {
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { DeleteEventDialog } from "@/features/calendar/components";
+import { images } from "@/shared/assets";
+import ColorPicker from "@/shared/components/ui/ColorPicker";
+import DatePicker from "@/shared/components/ui/DatePicker";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useDeleteEventDialogStore } from "../../hooks/useDeleteEventDialog";
 import {
 	type EventFormValues,
 	formSchema,
 } from "../../schemas/eventFormSchema";
 import type { CalendarEvent } from "../../types";
-import DatePicker from "@/shared/components/ui/DatePicker";
-import ColorPicker from "@/shared/components/ui/ColorPicker";
-import { images } from "@/shared/assets";
 
 interface CalendarFormProps {
 	selectedEvent: CalendarEvent | null;
@@ -45,7 +45,6 @@ interface CalendarFormProps {
 	} | null;
 	isModalOpen: boolean;
 	onSubmitEvent: (data: CalendarEvent) => void;
-	onDeleteEvent?: () => void;
 }
 
 const EventForm = ({
@@ -53,9 +52,8 @@ const EventForm = ({
 	selectedDateRange,
 	isModalOpen,
 	onSubmitEvent,
-	onDeleteEvent,
 }: CalendarFormProps) => {
-	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+	const setDeleteDialog = useDeleteEventDialogStore().setOpen;
 
 	// --- FORM Definition ---
 	const form = useForm<EventFormValues>({
@@ -147,9 +145,9 @@ const EventForm = ({
 						<FormItem>
 							<FormControl
 								className={`focus-visible:ring-axon-blue focus-visible:ring-2 border-none py-2 rounded-lg w-full font-medium ${
-									fieldState.invalid
-										? "ring-1 ring-destructive"
-										: "ring-1 ring-transparent"
+									fieldState.invalid ?
+										"ring-1 ring-destructive"
+									:	"ring-1 ring-transparent"
 								}`}>
 								<InputGroup>
 									<InputGroupInput placeholder='Name' {...field} />
@@ -302,19 +300,13 @@ const EventForm = ({
 						{selectedEvent ? "Edit event" : "Add event"}
 					</Button>
 					{selectedEvent && (
-						<>
-							<Button
-								onClick={() => setIsDeleteModalOpen(true)}
-								variant={"ghost"}
-								className='cursor-pointer w-[50px] h-[50px] hover:bg-[#ffc8c8] rounded-xl flex items-center justify-center'>
-								<Trash2 className='w-full h-full text-destructive' />
-							</Button>
-							<DeleteEventDialog
-								open={isDeleteModalOpen}
-								onOpenChange={setIsDeleteModalOpen}
-								onConfirm={() => onDeleteEvent?.()}
-							/>
-						</>
+						<Button
+							type='button'
+							onClick={() => setDeleteDialog(true)}
+							variant={"ghost"}
+							className='cursor-pointer w-[50px] h-[50px] hover:bg-[#ffc8c8] rounded-xl flex items-center justify-center'>
+							<Trash2 className='w-full h-full text-destructive' />
+						</Button>
 					)}
 				</div>
 			</form>

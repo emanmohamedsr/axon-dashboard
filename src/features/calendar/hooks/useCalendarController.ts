@@ -10,10 +10,13 @@ import { useEffect, useRef, useState } from "react";
 import useCalendarEvents from "./useCalendarEvents";
 import type { CalendarEvent } from "../types";
 import { v4 as uuidv4 } from "uuid";
+import { useDeleteEventDialogStore } from "./useDeleteEventDialog";
 
 export const useCalendarController = () => {
 	// --- STATE ---
 	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const setDeleteDialog = useDeleteEventDialogStore().setOpen;
 
 	const { events, addEvent, updateEvent, deleteEvent, resizeEvent, dropEvent } =
 		useCalendarEvents();
@@ -37,6 +40,7 @@ export const useCalendarController = () => {
 		if (!isModalOpen) {
 			setSelectedEvent(null);
 			setSelectedDateRange(null);
+			setDeleteDialog(false);
 		}
 	}, [isModalOpen]);
 
@@ -94,11 +98,13 @@ export const useCalendarController = () => {
 			addEvent(newEvent);
 		}
 		setIsModalOpen(false);
+		setDeleteDialog(false);
 	};
 
 	const handleEventDelete = () => {
 		deleteEvent(selectedEvent?.id || "");
 		setIsModalOpen(false);
+		setDeleteDialog(false);
 	};
 	return {
 		handleViewChange,
